@@ -30,8 +30,7 @@ def talkAI_EN(user_message):
         # various of response
         temperature=0.6,
         # weather streaming of response
-        stream=False,
-        api_key
+        stream=False
     )
     # elobot_el response
     gpt_response = response["choices"][0]["message"]["content"]

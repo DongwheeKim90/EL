@@ -25,30 +25,32 @@ tab_1, tab_2 = st.tabs(["ENG Teacher", "Nice artist"])
 # EN : OPENAI_CHAT
 with tab_1:
     # Managing History. Initialize session state for storing chat history if it doesn't exist.
+    # if messages not in session_state, print out blank.
     if "messages" not in st.session_state:
         st.session_state["messages"] = []
     
     # conversation area
     message_area = st.container(height=300)
-
-    # Display chat history on initial load
+    # --Display chat history on initial load when input the message
     with message_area:
         for role, message in st.session_state["messages"]:
+            # --parameter of chat_meesage is role. role include of user and assistant
             st.chat_message(role).write(message)
     
     # Input area & user ask
     st_userAsk = st.chat_input(placeholder="Please ask to ELOBOT_EN About English", key=None, max_chars=None, disabled=False, on_submit=None, args=None, kwargs=None)
     
     if st_userAsk:
-        # Get response from elobot
+        # Get response from elobot : return answer for ask from openai_fun.py > talkAI_EN
         st_gpt_response = talkAI_EN(st_userAsk)
         
         # Update chat history
+        # according st.seesion_STATE include of key(role), value(message)
         st.session_state["messages"].append(('user', st_userAsk))
         st.session_state["messages"].append(('assistant', st_gpt_response))
         
         # Display new messages
         with message_area:
-            # Display only the last two messages
+            # Display every messages of user & assistant
             st.chat_message("user").write(st_userAsk)
             st.chat_message("assistant").write(st_gpt_response)

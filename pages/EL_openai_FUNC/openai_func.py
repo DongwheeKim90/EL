@@ -6,6 +6,7 @@ import streamlit as st
 # API_KEY 설정
 # --Inner
 openai.api_key = os.environ.get("mySecretkey_openai")
+# --streamlit
 myOpenAI_Key = st.secrets["mySecretkey_openai"]
 
 # (1) openai Chatbot : no settings

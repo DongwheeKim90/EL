@@ -1,10 +1,12 @@
 #import library
 import openai
 import os
+import streamlit as st
 
 # API_KEY 설정
 # --Inner
 openai.api_key = os.environ.get("mySecretkey_openai")
+myOpenAI_Key = st.secrets["mySecretkey_openai"]
 
 # (1) openai Chatbot : no settings
 def talkAI_EN(user_message):
@@ -28,7 +30,8 @@ def talkAI_EN(user_message):
         # various of response
         temperature=0.6,
         # weather streaming of response
-        stream=False
+        stream=False,
+        api_key
     )
     # elobot_el response
     gpt_response = response["choices"][0]["message"]["content"]

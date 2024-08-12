@@ -16,7 +16,7 @@ st.markdown("In the future, we plan to release ELOBOT, created with our own tech
 #-Kinds of ELOBOT
 elobot_df = pd.DataFrame({
     "Model Num" : ["EL-ELOBOT-EN-1.0", "EL-PAINTBOT-HWABAECK-1.0"],
-    "Model Name" : ["ELOBOT is English teacher", "ELBOT is nice artist"],
+    "Model Name" : ["ELOBOT is English teacher", "ELBOT is nice Artist"],
     "Model Function(summary)" : ["This is a bot that answers questions about English words or sentences and corrects errors.", "This bot helps you visualize what's in your head."]
 })
 st.dataframe(elobot_df, hide_index=True, use_container_width=True, width=700)

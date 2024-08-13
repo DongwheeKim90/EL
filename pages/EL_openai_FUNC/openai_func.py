@@ -6,9 +6,9 @@ from langchain.schema import SystemMessage, HumanMessage
 
 # API_KEY 설정
 # --Inner
-os.environ["OPENAI_API_KEY"] = os.environ.get("mySecretkey_openai")
+#os.environ["OPENAI_API_KEY"] = os.environ.get("mySecretkey_openai")
 # --streamlit
-#myOpenAI_Key = st.secrets["mySecretkey_openai"]
+myOpenAI_Key = st.secrets["mySecretkey_openai"]
 
 # ChatOpenAI 인스턴스 생성
 client = ChatOpenAI(temperature=0.6, openai_api_key=os.environ.get("mySecretkey_openai"))

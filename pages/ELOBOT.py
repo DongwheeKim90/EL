@@ -106,22 +106,20 @@ with tab_2:
             drawing_area_col_1,drawing_area_col_2 = st.columns([1.5,1])
             with drawing_area_col_1:
                 
-                st.title("The HWABAEK-ELOBOT ZONE!!")
-                st.markdown("### ")
+                st.title("The HWABAEK-ELOBOT ZONE!!🖼️",  help=None)
+                st.subheader(":red[Attention please, If you use sentences or words that include of any dangerous or violent meanings, HWABAEK-ELBOT can't drawing.👿]",  help=None)
+                st.subheader("Please use HWABAEK-ELBOT with a mature and rational mind.😍",  help=None)
                 prompt = st.text_input("1.Please enter detailed words or sentences for high-quality","Here is text-input area.")
-                imgtype = st.radio("2.Please select type of image.",
-                    ["natural", "vivid"])
                 kinds_of_size = ["1024x1024","1024x1792","1792x1024"]
                 imgsize = st.selectbox(
-                    "3.Please select size of image",
+                    "2.Please select size of image",
                     (kinds_of_size)
                 )
-                st.markdown("### ")
 
                 HWABAEK_ACTION_BTN = st.button("Drawing Image", use_container_width=True, type="primary")
                 HWABAEK_RESULT = None
                 if HWABAEK_ACTION_BTN:
-                    HWABAEK_RESULT = generate_response(prompt, imgtype, imgsize)
+                    HWABAEK_RESULT = generate_response(prompt, imgsize)
 
             with drawing_area_col_2:
                 if HWABAEK_RESULT:
@@ -131,7 +129,6 @@ with tab_2:
                     
                     # 이미지 데이터를 바이너리 형식으로 변환
                     img = Image.open(io.BytesIO(response.content))
-                    
                     # 이미지를 화면에 표시
                     with st.container(height=450, border=True):
                         st.image(img, use_column_width=True)

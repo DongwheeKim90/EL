@@ -33,20 +33,23 @@ with tab_1:
     with EN_col_1:
         st.image("useData/EL_img/ELOBOT_ENG.png", width=350)
     with EN_col_2:
+        # conversation area
+        message_area = st.container(height=300)
+        with message_area:
+            enbot_area_1, enbot_area_2, enbot_area_3 = st.columns([3,9,1])
+            with enbot_area_2:
+                st.image("useData/EL_img/ELBOT_ENG_BEFORE.png", width=480)
+
         # Managing History. Initialize session state for storing chat history if it doesn't exist.
         # if messages not in session_state, print out blank.
         if "messages" not in st.session_state:
             # make a empty list and saving message here
             st.session_state["messages"] = []
-
-        # conversation area
-        message_area = st.container(height=300)
-        # --Display chat history on initial load when input the message
-        with message_area:
-            for role, message in st.session_state["messages"]:
-                # --parameter of chat_meesage is role. role include of user and assistant
-                st.chat_message(role).write(message)
-        
+            # --Display chat history on initial load when input the message
+            with message_area:
+                for role, message in st.session_state["messages"]:
+                    # --parameter of chat_meesage is role. role include of user and assistant
+                    st.chat_message(role).write(message)
 
         # Input area & user ask
         st_userAsk = st.chat_input(placeholder="Please ask to ELOBOT_EN About English", key=None, max_chars=None, disabled=False, on_submit=None, args=None, kwargs=None)
@@ -92,7 +95,7 @@ with tab_2:
         st.markdown("#")        
 
     #Describe & Setting area for drawing images.
-    kinds_NA_ELOBOT = ["HWABAEK : The HWABAEK-ELOBOT is drawing what your thinkin or imagination.",
+    kinds_NA_ELOBOT = ["HWABAEK : The HWABAEK-ELOBOT is drawing what your thinking or imagination.",
                        "JAVIS-ELOBOT : The JAVIS-ELOBOT is drawing that New Products with slogan."]
             
     option = st.selectbox(
@@ -107,8 +110,8 @@ with tab_2:
             with drawing_area_col_1:
                 
                 st.title("The HWABAEK-ELOBOT ZONE!!🖼️",  help=None)
-                st.subheader(":red[Attention please, If you use sentences or words that include of any dangerous or violent meanings, HWABAEK-ELBOT can't drawing.👿]",  help=None)
-                st.subheader("Please use HWABAEK-ELBOT with a mature and rational mind.😍",  help=None)
+                st.subheader(":red[Attention⚠️!!] If using sentences or words that include of any dangerous, violent meanings, HWABAEK-ELBOT can't drawing. Please use HWABAEK-ELBOT with a mature and rational mind.😍",  help=None)
+                st.markdown("##### :red[※If you contact Error('content_policy_violation'), Don't hesitate and Press F5(refresh)]",  help=None)                
                 prompt = st.text_input("1.Please enter detailed words or sentences for high-quality","Here is text-input area.")
                 kinds_of_size = ["1024x1024","1024x1792","1792x1024"]
                 imgsize = st.selectbox(
@@ -122,6 +125,7 @@ with tab_2:
                     HWABAEK_RESULT = generate_response(prompt, imgsize)
 
             with drawing_area_col_2:
+          
                 if HWABAEK_RESULT:
                     
                     # URL에서 이미지를 가져오기
@@ -146,6 +150,16 @@ with tab_2:
                         mime="image/png",
                         use_container_width=True
                     )
+                elif HWABAEK_RESULT == '''NONE''':
+                    with st.container(height=450, border=True):
+                        st.image("useData/EL_img/ELBOT_HWABAEK_BAN.png")   
+
                 else:
                     with st.container(height=450, border=True):
                         st.image("useData/EL_img/HWABAEK_GUIDE.png")
+
+
+
+print("=========")
+print(HWABAEK_RESULT)
+print("=========")

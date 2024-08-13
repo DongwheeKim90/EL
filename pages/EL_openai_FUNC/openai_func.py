@@ -8,7 +8,7 @@ from langchain.schema import SystemMessage, HumanMessage
 # --Inner
 os.environ["OPENAI_API_KEY"] = os.environ.get("mySecretkey_openai")
 # --streamlit
-myOpenAI_Key = st.secrets["mySecretkey_openai"]
+#myOpenAI_Key = st.secrets["mySecretkey_openai"]
 
 # ChatOpenAI 인스턴스 생성
 client = ChatOpenAI(temperature=0.6, openai_api_key=os.environ.get("mySecretkey_openai"))
@@ -50,16 +50,22 @@ def generate_response(prompt, imgsize):
     
     gpt_prompt_result = response.content.strip()  # AIMessage 객체에서 직접 content를 가져옴
 
-    # DALL-E 이미지 생성
-    dalle_response = openai.images.generate(
-        model="dall-e-3",
-        prompt=gpt_prompt_result,
-        size=imgsize,
-        n=1
-    )
-    dalle_img_url = dalle_response.data[0].url
+    try:
+        # DALL-E 이미지 생성
+        dalle_response = openai.images.generate(
+            model="dall-e-3",
+            prompt=gpt_prompt_result,
+            size=imgsize,
+            n=1
+        )
+        dalle_img_url = dalle_response.data[0].url
+
+    except (openai.BadRequestError, openai.APIError, openai.APIConnectionError, openai.RateLimitError) as e:
+        # 오류가 발생했을 때 예외 처리
+        print("★★★★★★★★★★★")
+        print(f"Error: {e}")
+        print("★★★★★★★★★★★")
+
+        dalle_img_url = '''NONE'''  # 오류가 발생하면 Danger_Input을 반환
 
     return dalle_img_url
-
-#--test
-#print(generate_response("웃고있는 아기 공룡", "1024x1024"))

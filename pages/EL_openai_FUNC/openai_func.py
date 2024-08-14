@@ -5,13 +5,11 @@ from langchain_openai import ChatOpenAI
 from langchain.schema import SystemMessage, HumanMessage
 
 # API_KEY 설정
-# --Inner
-os.environ["OPENAI_API_KEY"] = os.environ.get("mySecretkey_openai")
-# --streamlit
-myOpenAI_Key = st.secrets["mySecretkey_openai"]
+os.environ["OPENAI_API_KEY"] = st.secrets["mySecretkey_openai"]
 
 # ChatOpenAI 인스턴스 생성
-client = ChatOpenAI(temperature=0.6, openai_api_key=os.environ.get("mySecretkey_openai"))
+client = ChatOpenAI(temperature=0.1,
+                    openai_api_key=os.environ.get("mySecretkey_openai"))
 
 # (1) openai Chatbot : ELBOT_EN
 def talkAI_EN(user_message):
@@ -25,38 +23,19 @@ def talkAI_EN(user_message):
     gpt_response = response.content  # AIMessage 객체에서 직접 content를 가져옴
     return gpt_response
 
-# (2) openai Chatbot : ELBOT_HWABAEK
-def HWABAEK_TRANSLATE_PROMPT(text):
-    messages = [
-        SystemMessage(content="You are a helpful assistant that translates Korean to English."),
-        HumanMessage(content=text)
-    ]
-    
-    response = client(messages=messages)
-    
-    return response.content.strip()  # AIMessage 객체에서 직접 content를 가져옴
-
-def generate_response(prompt, imgsize):
-    # 번역 결과 생성
-    translate_result = HWABAEK_TRANSLATE_PROMPT(prompt)
-
-    # GPT-3.5 응답 생성
-    messages = [
-        SystemMessage(content="Imagine the details of the input shape. Please answer briefly."),
-        HumanMessage(content=translate_result)
-    ]
-    
-    response = client(messages=messages)
-    
-    gpt_prompt_result = response.content.strip()  # AIMessage 객체에서 직접 content를 가져옴
+# (2) Dall-e-3 : ELBOT_HWABAEK
+def generate_response(imgprompt, imgsize, imgquality):
 
     try:
         # DALL-E 이미지 생성
         dalle_response = openai.images.generate(
-            model="dall-e-3",
-            prompt=gpt_prompt_result,
-            size=imgsize,
-            n=1
+        model="dall-e-3",
+        prompt=imgprompt,
+        #size : 1024x1024, 1024x1792, 1792x1024
+        size=imgsize,
+        #quality : standard 기본, hd 고품질
+        quality=imgquality,
+        n=1,
         )
         dalle_img_url = dalle_response.data[0].url
 
@@ -69,3 +48,32 @@ def generate_response(prompt, imgsize):
         dalle_img_url = '''NONE'''  # 오류가 발생하면 Danger_Input을 반환
 
     return dalle_img_url
+
+# (3) openai + Dalle-3 : Davis
+def sparta_advertiseAI(req_ad):
+    chat_completion = openai.chat.completions.create(
+        messages=[
+            {
+                "role": "system",
+                "content": f"나는 광고 컨설팅 전문가, 제품 디자인 전문가야. 너가 요청한 {req_ad}를 위해 멋진 슬로건을 만들수 있어.",
+            },
+            {
+                "role": "user",
+                "content": f"나는 새로운 상품 또는 서비스 기획과 출시를 앞두고 있어. 제발 부탁인데 내가 요청한 {req_ad} 를 신경써서 세련된 슬로건을그려줘. 참고로 나는 너의 고객이 아니고 업무를 지시하는 요청자야. 내가 한번 지시를 한 것에 다시 또 물어보거나 정보요청하는 문구를 말하지말고 {req_ad} 를 다시 한번 보고 작업해줘.",
+            }
+        ],
+        model="gpt-4o",
+    )
+    adver_res = chat_completion.choices[0].message.content
+
+    make_ad = openai.images.generate(
+        model="dall-e-3",
+        prompt=req_ad,
+        size="1024x1024",
+        quality="hd",
+        n=1
+        )
+
+    image_url = make_ad.data[0].url
+    
+    return adver_res, image_url

@@ -1,5 +1,5 @@
 #import method
-from pages.EL_openai_FUNC.openai_func import talkAI_EN, generate_response
+from pages.EL_openai_FUNC.openai_func import talkAI_EN, generate_response, sparta_advertiseAI
 #import library
 from PIL import Image
 import io
@@ -18,9 +18,9 @@ st.markdown("In the future, we plan to release ELOBOT, created with our own tech
 
 #-Kinds of ELOBOT
 elobot_df = pd.DataFrame({
-    "Model Num" : ["EL-ELOBOT-EN-1.0", "EL-PAINTBOT-HWABAEK-1.0"],
-    "Model Name" : ["ELOBOT is English teacher", "ELBOT is nice Artist"],
-    "Model Function(summary)" : ["This is a bot that answers questions about English words or sentences and corrects errors.", "This bot helps you visualize what's in your head."]
+    "Model Num" : ["EL-ELOBOT-EN-1.0", "EL-PAINTBOT-HWABAEK-1.0", "EL-SLOGANBOT-DAVIS-1.0"],
+    "Model Name" : ["ELOBOT-EN is English teacher", "HWABAEK is nice Artist", "DAVIS is a versatile advertising and marketing strategist."],
+    "Model Function(summary)" : ["This is a bot that answers questions about English words or sentences and corrects errors.", "This bot helps you visualize what's in your head.", "This bot delivers innovative slogans and designs for new products or items."]
 })
 st.dataframe(elobot_df, hide_index=True, use_container_width=True, width=700)
 #body
@@ -38,7 +38,7 @@ with tab_1:
         with message_area:
             enbot_area_1, enbot_area_2, enbot_area_3 = st.columns([3,9,1])
             with enbot_area_2:
-                st.image("useData/EL_img/ELBOT_ENG_BEFORE.png", width=480)
+                st.image("useData/EL_img/ELOBOT_ENG_BEFORE.png", width=480)
 
         # Managing History. Initialize session state for storing chat history if it doesn't exist.
         # if messages not in session_state, print out blank.
@@ -88,78 +88,130 @@ with tab_2:
         st.markdown("##### (2)JAVIS-ELOBOT")
         st.markdown("##### The JAVIS-ELOBOT can drawing that New Products with slogan.\
                     For example, If your company prepare to new product design planning or before launch? \
-                    JAVIS-ELBOT can helpful to you. JAVIS-ELOBOT can your own secretary.")
+                    JAVIS-ELOBOT can helpful to you. JAVIS-ELOBOT can your own secretary.")
         st.markdown("##### Draw your own image and see your imagination and thoughts together!")
 
     with hwabaek_col_4:
-        st.markdown("#")        
+        st.markdown("#")
 
     #Describe & Setting area for drawing images.
-    kinds_NA_ELOBOT = ["HWABAEK : The HWABAEK-ELOBOT is drawing what your thinking or imagination.",
-                       "JAVIS-ELOBOT : The JAVIS-ELOBOT is drawing that New Products with slogan."]
-            
+    kinds_ELOBOT = ["HWABAEK-ELOBOT : The HWABAEK-ELOBOT is drawing what your thinking or imagination.",
+                       "DAVIS-ELOBOT : The JAVIS-ELOBOT is drawing that New Products with slogan."]
+    st.divider()
     option = st.selectbox(
         "Please select ELOBOT option for your purpose.",
-        (kinds_NA_ELOBOT)
+        (kinds_ELOBOT)
     )
-    print(option)
-    for v in range(len(kinds_NA_ELOBOT)):
+    if option == kinds_ELOBOT[0]:
+        drawing_area_col_1,drawing_area_col_2 = st.columns([1.5,1])
+        with drawing_area_col_1:
+            
+            st.title("The HWABAEK-ELOBOT ZONE!!🖼️",  help=None)
+            st.subheader(":red[Attention⚠️!!] If using sentences or words that include of any dangerous, violent meanings, HWABAEK-ELOBOT can't drawing. Please use HWABAEK-ELOBOT with a mature and rational mind.😍",  help=None)
+            st.markdown("##### :red[※If you contact Error('content_policy_violation'), Don't hesitate and Press F5(refresh)]",  help=None)                
+            imgprompt = st.text_input("1.Please enter detailed words or sentences for high-quality","Here is text-input area.")
+            kinds_of_size = ["1024x1024","1024x1792","1792x1024"]
+            imgsize = st.selectbox(
+                "2.Please select size of image",
+                (kinds_of_size)
+            )
+            kinds_of_quality = ["standard", "hd"]
+            imgquality = st.selectbox("3.Please select quality of image", (kinds_of_quality))
 
-        if option == kinds_NA_ELOBOT[v]:
-            drawing_area_col_1,drawing_area_col_2 = st.columns([1.5,1])
-            with drawing_area_col_1:
-                
-                st.title("The HWABAEK-ELOBOT ZONE!!🖼️",  help=None)
-                st.subheader(":red[Attention⚠️!!] If using sentences or words that include of any dangerous, violent meanings, HWABAEK-ELBOT can't drawing. Please use HWABAEK-ELBOT with a mature and rational mind.😍",  help=None)
-                st.markdown("##### :red[※If you contact Error('content_policy_violation'), Don't hesitate and Press F5(refresh)]",  help=None)                
-                prompt = st.text_input("1.Please enter detailed words or sentences for high-quality","Here is text-input area.")
-                kinds_of_size = ["1024x1024","1024x1792","1792x1024"]
-                imgsize = st.selectbox(
-                    "2.Please select size of image",
-                    (kinds_of_size)
-                )
+            HWABAEK_ACTION_BTN = st.button("Drawing Image", use_container_width=True, type="primary")
+            HWABAEK_RESULT = None
 
-                HWABAEK_ACTION_BTN = st.button("Drawing Image", use_container_width=True, type="primary")
-                HWABAEK_RESULT = None
-                if HWABAEK_ACTION_BTN:
-                    HWABAEK_RESULT = generate_response(prompt, imgsize)
-
-            with drawing_area_col_2:
-          
-                if HWABAEK_RESULT:
-                    
-                    # URL에서 이미지를 가져오기
-                    response = requests.get(HWABAEK_RESULT) 
-                    
-                    # 이미지 데이터를 바이너리 형식으로 변환
-                    img = Image.open(io.BytesIO(response.content))
-                    # 이미지를 화면에 표시
-                    with st.container(height=450, border=True):
+        with drawing_area_col_2:
+        
+            if HWABAEK_ACTION_BTN:
+                # 이미지를 화면에 표시
+                with st.container(height=485, border=True):                    
+                    with st.spinner("Drawing the image. please wait👨‍🍳"):
+                        HWABAEK_RESULT = generate_response(imgprompt, imgsize, imgquality)
+                        # URL에서 이미지를 가져오기
+                        response = requests.get(HWABAEK_RESULT) 
+                        # 이미지 데이터를 바이너리 형식으로 변환
+                        img = Image.open(io.BytesIO(response.content))
                         st.image(img, use_column_width=True)
-                    
-                    # 이미지를 바이트 배열로 변환
-                    img_byte_arr = io.BytesIO()
-                    img.save(img_byte_arr, format='PNG')
-                    img_byte_arr = img_byte_arr.getvalue()
-                    
-                    # 다운로드 버튼 제공
-                    st.download_button(
-                        label="Download",
-                        data=img_byte_arr,
-                        file_name="HWABAEK_BOT_IMG.png",
-                        mime="image/png",
-                        use_container_width=True
-                    )
-                elif HWABAEK_RESULT == '''NONE''':
-                    with st.container(height=450, border=True):
-                        st.image("useData/EL_img/ELBOT_HWABAEK_BAN.png")   
+                        # 이미지를 바이트 배열로 변환
+                        img_byte_arr = io.BytesIO()
+                        img.save(img_byte_arr, format='PNG')
+                        img_byte_arr = img_byte_arr.getvalue()
+                # 다운로드 버튼 제공
+                st.download_button(
+                    label="Download",
+                    data=img_byte_arr,
+                    file_name="HWABAEK_BOT_IMG.png",
+                    mime="image/png",
+                    use_container_width=True
+                )
+            elif HWABAEK_RESULT == '''NONE''':
+                with st.container(height=550, border=True):
+                    st.image("useData/EL_img/ELOBOT_HWABAEK_BAN.png")   
 
+            else:
+                with st.container(height=550, border=True):
+                    st.image("useData/EL_img/HWABAEK_GUIDE.png")
+    
+    if option == kinds_ELOBOT[1]:
+        st.subheader("Do you have any ideas for a new product or service?🙂 We can offer you :red[Triple-S]!!")
+        st.subheader("Remember, you have the right to work comfortably and efficiently.")
+        st.subheader("Save your :blue[Money]💰, Save your :blue[Time]🕒, Save your :blue[Energy]💪")
+        st.subheader(":red[DAVIS-ELOBOT] will improve the quality of the work environment. So just sit back and comfortably type away😎")        
+        adpd_col_1, adpd_col_2 = st.columns([0.4,0.6])
+        with adpd_col_1:
+            st.image("useData/EL_img/ELOBOT_PD_AD.png")
+            myItems = st.text_input("(1) Please input your what kind of item.","Please specify the exact kind of item.")
+            myItems_feature = st.text_input("(2) Please input your what feature or function of item.","Please enter the detailed features or functions of the item.")
+            myItems_market = st.text_input("(3) Please input your target market.","Please specify the target market, e.g., the United States, Europe, etc.")
+            myItems_Client = st.text_input("(4) Please input your target client.","Specify the target client, e.g., men in their 30s, middle-class, etc.")
+            myItems_add = st.text_input("(5) Please input what you want to add words or sentences about item.","Please provide any additional phrases or keywords for DAVIS to consider.")
+            myItems_button = st.button("Submit", use_container_width=True, type="primary")
+        with adpd_col_2:
+            slogan_img_area = st.container(border=True, height=1020)
+            with slogan_img_area:
+                if myItems_button:
+                    with st.spinner("Your order is being processed👨‍🍳"):
+                        # 주문 내용을 생성
+                        myItems_order = f"{myItems} 은 {myItems_feature} 기능 및 특징을 가지고 있어. {myItems}를 판매할 지역은 {myItems_market} 이고 판매 대상은 {myItems_Client}이야. 앞에서 말한 것들과 {myItems_add}를 참고 해서 슬로건 문구와 이미지를 만들어줘. "
+                        action_order = sparta_advertiseAI(myItems_order)
+
+                        slogan_result = action_order[0]
+                        pdimg_result = action_order[1]
+
+                        # 슬로건 컨테이너
+                        slogan_area = st.container(border=True, height=475)
+                        # 이미지 컨테이너
+                        pdimg_area = st.container(border=True, height=475)
+
+                        # 슬로건 컨테이너에 결과 표시
+                        with slogan_area:
+                            st.write(slogan_result)
+                        
+                        # 이미지 컨테이너에 이미지 표시 및 다운로드 버튼 추가
+                        with pdimg_area:
+                            # URL에서 이미지를 가져오기
+                            sloganimg_response = requests.get(pdimg_result)
+                            # 이미지 데이터를 바이너리 형식으로 변환
+                            img = Image.open(io.BytesIO(sloganimg_response.content))
+                            
+                            # 이미지를 한 번만 표시
+                            st.image(img, use_column_width=True)
+
+                            # 이미지를 바이트 배열로 변환
+                            img_byte_arr = io.BytesIO()
+                            img.save(img_byte_arr, format='PNG')
+                            img_byte_arr = img_byte_arr.getvalue()
+
+                        # 다운로드 버튼을 이미지 아래에 배치
+                        st.download_button(
+                            label="Download",
+                            data=img_byte_arr,
+                            file_name="SLOGAN_IMG.png",
+                            mime="image/png",
+                            use_container_width=True
+                        )
                 else:
-                    with st.container(height=450, border=True):
-                        st.image("useData/EL_img/HWABAEK_GUIDE.png")
-
-
-
-print("=========")
-print(HWABAEK_RESULT)
-print("=========")
+                    davis_col_1, davis_col_2, davis_col_3 = st.columns([0.5,9,0.5])
+                    with davis_col_2:
+                        st.image("useData/EL_img/ELOBOT_DAVIS_HOPE.png", width=700)

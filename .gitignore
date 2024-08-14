@@ -1,3 +1,4 @@
 #환경설정
-.env
+.streamlit
+secrets.toml
 venv

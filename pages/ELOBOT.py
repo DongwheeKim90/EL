@@ -24,7 +24,7 @@ elobot_df = pd.DataFrame({
 })
 st.dataframe(elobot_df, hide_index=True, use_container_width=True, width=700)
 #body
-tab_1, tab_2 = st.tabs(["ENG Teacher", "Nice Artist"])
+tab_1, tab_2 = st.tabs(["ENG Teacher", "Nice Artist & Marketing"])
 
 # EN : OPENAI_CHAT
 with tab_1:

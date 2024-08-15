@@ -1,3 +1,4 @@
 #환경설정
 secrets.toml
 venv
+.python-version

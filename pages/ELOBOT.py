@@ -28,46 +28,44 @@ tab_1, tab_2 = st.tabs(["ENG Teacher", "Nice Artist & Marketing"])
 
 # EN : OPENAI_CHAT
 with tab_1:
-    #divide layout and fix the area rate
-    EN_col_1, EN_col_2 = st.columns([1,2.8])
+    # Divide layout and fix the area rate
+    EN_col_1, EN_col_2 = st.columns([1, 2.8])
+    
     with EN_col_1:
         st.image("useData/EL_img/ELOBOT_ENG.png", width=350)
+    
     with EN_col_2:
-        # conversation area
-        message_area = st.container(height=300)
-        with message_area:
-            enbot_area_1, enbot_area_2, enbot_area_3 = st.columns([3,9,1])
-            with enbot_area_2:
-                st.image("useData/EL_img/ELOBOT_ENG_BEFORE.png", width=480)
+        # Conversation area with a fixed height container
+        message_area = st.container(height=300, border=True)
 
         # Managing History. Initialize session state for storing chat history if it doesn't exist.
-        # if messages not in session_state, print out blank.
         if "messages" not in st.session_state:
-            # make a empty list and saving message here
             st.session_state["messages"] = []
-            # --Display chat history on initial load when input the message
-            with message_area:
+
+        # Display chat history or image
+        
+        with message_area:
+            if len(st.session_state["messages"]) != 0:
+                # Display all chat history
                 for role, message in st.session_state["messages"]:
-                    # --parameter of chat_meesage is role. role include of user and assistant
                     st.chat_message(role).write(message)
 
-        # Input area & user ask
-        st_userAsk = st.chat_input(placeholder="Please ask to ELOBOT_EN About English", key=None, max_chars=None, disabled=False, on_submit=None, args=None, kwargs=None)
-        
+        # Input area for user questions, separate from the message area
+        st_userAsk = st.chat_input(placeholder="Please ask ELOBOT_EN about English")
+
         if st_userAsk:
-            # Get response from elobot : return answer for ask from openai_fun.py > talkAI_EN
+            # Get response from ELOBOT : return answer for ask from openai_fun.py > talkAI_EN
             st_gpt_response = talkAI_EN(st_userAsk)
-            
+
             # Update chat history
-            # according st.seesion_STATE include of key(role), value(message)
             st.session_state["messages"].append(('user', st_userAsk))
             st.session_state["messages"].append(('assistant', st_gpt_response))
-            
-            # Display new messages
+
+            # Display only the new messages
             with message_area:
-                # Display every messages of user & assistant
                 st.chat_message("user").write(st_userAsk)
                 st.chat_message("assistant").write(st_gpt_response)
+                
 # NA : OPENAI_CHAT                
 with tab_2:
 

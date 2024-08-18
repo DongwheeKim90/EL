@@ -90,7 +90,7 @@ with study_zone_1:
         st.divider()
         
         
-        st.subheader("4. N차원 형태 및 사이즈")
+        st.subheader("3. N차원 형태 및 사이즈")
         numpy_5, numpy_6 = st.columns(2)
         with numpy_5:
             shape_arr1 = np.array([1,2,3])
@@ -121,7 +121,7 @@ with study_zone_1:
             st.write(f"크기 : {shape_arr2.size}")
         st.divider()
         
-        st.subheader("5. N차원 배열의 타입")
+        st.subheader("4. N차원 배열의 타입")
         numpy_7, numpy_8 = st.columns(2)
         with numpy_7:
             st.code('''
@@ -157,7 +157,7 @@ with study_zone_1:
         st.write(f"타입 : {int_float_arr.dtype}")
         st.divider()
         
-        st.subheader("6. 정해진 형식의 N차원 배열")
+        st.subheader("5. 정해진 형식의 N차원 배열")
         st.write("(1) 1차원")
         numpy_9, numpy_10, numpy_11 = st.columns(3)
         with numpy_9:
@@ -208,7 +208,7 @@ with study_zone_1:
             st.write(def_arr_2_full)
         st.divider()
         
-        st.subheader("7. 특정범위 값을 가지는 N차원 배열")
+        st.subheader("6. 특정범위 값을 가지는 N차원 배열")
         numpy_15, numpy_16 = st.columns(2)
         with numpy_15:
             st.code('''
@@ -247,7 +247,7 @@ with study_zone_1:
         st.write(arr_arange_loogspace)
         st.divider()
         
-        st.subheader("8. 난수로 N 차원 배열 생성")
+        st.subheader("7. 난수로 N 차원 배열 생성")
         numpy_19, numpy_20 = st.columns(2)
         with numpy_19:
             st.code('''
@@ -319,7 +319,7 @@ with study_zone_1:
         st.pyplot(fig2)
         st.divider()
         
-        st.subheader("9. Seed 값으로 난수생성 제어")
+        st.subheader("8. Seed 값으로 난수생성 제어")
         numpy_23, numpy_24= st.columns(2)
         with numpy_23:
             st.code('''
@@ -338,7 +338,7 @@ with study_zone_1:
             st.write(arr_nansoo_1)
         st.divider()
         
-        st.subheader("10. Index로 배열 조회")
+        st.subheader("9. Index로 배열 조회")
         numpy_25, numpy_26 = st.columns(2)
         with numpy_25:
             st.code('''arr_1_index = np.arange(10)
@@ -416,7 +416,7 @@ with study_zone_1:
         arr_2_boolean[arr_2_boolean>=6]
         st.divider()
         
-        st.subheader("11. N차원 연산 : 연산하고자 할 때 배열의 shape이 같아야함. 물론 shape이 다르면 broadcasting으로 연산이 가능함")
+        st.subheader("10. N차원 연산 : 연산하고자 할 때 배열의 shape이 같아야함. 물론 shape이 다르면 broadcasting으로 연산이 가능함")
         arr_cal_2 = np.array([[1,2,3],
                     [4,5,6],
                     [7,8,9],
@@ -482,7 +482,7 @@ with study_zone_1:
             arrcal_2
         st.divider()
         
-        st.subheader("12. dot : 두 백터를 곱하여 스칼라 산출")
+        st.subheader("11. dot : 두 백터를 곱하여 스칼라 산출")
         numpy_37, numpy_38, numpy_39 = st.columns(3)
         with numpy_37:
             arr_dot_1 = np.array([1,2,3])
@@ -516,7 +516,7 @@ with study_zone_1:
             dot_result_1
         st.divider()
         
-        st.subheader("13. 절대값, 올림, 내림, 반올림, 버림")
+        st.subheader("12. 절대값, 올림, 내림, 반올림, 버림")
         numpy_43, numpy_44, numpy_45, numpy_46, numpy_47 =st.columns(5)
         with numpy_43:
             arr_juldae = np.array([[-1,-2],[-3,-4]])
@@ -563,7 +563,7 @@ with study_zone_1:
             arr_target_trunc
         st.divider()
         
-        st.subheader("14. 2차원 배열 최소값, 최대값, 평균값, 표준편차값, 누적값, 중앙값")
+        st.subheader("13. 2차원 배열 최소값, 최대값, 평균값, 표준편차값, 누적값, 중앙값")
         arr_minmax = np.array([[9,8,7],[6,5,4],[3,2,1]])
         arr_minmax
         numpy_48, numpy_49, numpy_50 = st.columns(3)
@@ -624,7 +624,7 @@ with study_zone_1:
             min_arr_median_1
         st.divider()
         
-        st.subheader("15. 2차원 배열간 비교")
+        st.subheader("14. 2차원 배열간 비교")
         numpy_54, numpy_55 = st.columns(2)
         with numpy_54:
             arr_compare_1 = np.array([[1,2,3,4],
@@ -648,7 +648,7 @@ with study_zone_1:
             arr_compare_1 <= arr_compare_2
         st.divider()
         
-        st.subheader("16. 삼각함수")
+        st.subheader("15. 삼각함수")
         st.write("np.array([[1,2,3], [4,5,6], [7,8,9]])")
         arr_triangle = np.array([[1,2,3],
                         [4,5,6],
@@ -669,7 +669,7 @@ with study_zone_1:
             tan_arr
         st.divider()
         
-        st.subheader("17. Broadcasting : 배열간 shape이 달라도 연산 가능")
+        st.subheader("16. Broadcasting : 배열간 shape이 달라도 연산 가능")
         numpy_59, numpy_60 = st.columns(2)
         with numpy_59:
             arr_broad_1 = np.array([[1,2,3],
@@ -695,7 +695,7 @@ with study_zone_1:
             broad34_result
         st.divider()
         
-        st.subheader("18. N차원 배열의 정렬")
+        st.subheader("17. N차원 배열의 정렬")
         numpy_61, numpy_62, numpy_63 = st.columns(3)
         with numpy_61:
             arr_sort = np.random.randint(100,size=50)
@@ -724,7 +724,7 @@ with study_zone_1:
             arr_sort_2_1
         st.divider()
         
-        st.subheader("19. argsort : 배열의 원래 인덱스를 반환")
+        st.subheader("18. argsort : 배열의 원래 인덱스를 반환")
         numpy_67, numpy_68 = st.columns(2)
         with numpy_67:
             argsort_arr = np.random.randint(9, size=(3,3))
@@ -740,7 +740,7 @@ with study_zone_1:
             argsort_arr_sort_origin
         st.divider()
         
-        st.subheader("20. N차원 배열의 형태변경")
+        st.subheader("19. N차원 배열의 형태변경")
         st.write('''
                     reshape(): 원본 배열의 총 요소 수를 변경하지 않으며, 데이터가 보존됩니다. 새로운 배열은 원본 배열의 뷰로, 같은 데이터를 공유합니다.
                     resize(): 배열의 크기를 조정하며, 필요하면 데이터가 반복되거나 잘려나갑니다. 새로운 배열이 생성되며, 원본 배열과 데이터가 다를 수 있습니다.
@@ -776,7 +776,7 @@ with study_zone_1:
             arr_resize_1_rabel
         st.divider()
         
-        st.subheader("21. 차원추가")
+        st.subheader("20. 차원추가")
         numpy_74, numpy_75, numpy_76 = st.columns(3)
         with numpy_74:
             arr_expand = np.array([1,2])
@@ -795,7 +795,7 @@ with study_zone_1:
             st.write(f"차원 : {arr_expand_0.ndim}")
         st.divider()    
             
-        st.subheader("22. 배열제거 후 차원축소")
+        st.subheader("21. 배열제거 후 차원축소")
         numpy_76, numpy_77, numpy_78 = st.columns(3)
         with numpy_76:
             st.code('''
@@ -816,7 +816,7 @@ with study_zone_1:
                     ''')
         st.divider()    
             
-        st.subheader("23. 전치행렬")
+        st.subheader("22. 전치행렬")
         numpy_79, numpy_80 = st.columns(2)
         with numpy_79:
             arr_junchi_1 = np.array([[1,2,3],
@@ -842,7 +842,7 @@ with study_zone_1:
             arr_junchi_2_result
         st.divider()    
         
-        st.subheader("24. 배열 특정 위치에 값 추가")
+        st.subheader("23. 배열 특정 위치에 값 추가")
         numpy_83, numpy_84 = st.columns(2) 
         with numpy_83:
             arr_add_value_1 = np.arange(1,9)
@@ -864,7 +864,7 @@ with study_zone_1:
             arr_add_value_2_0
         st.divider()
         
-        st.subheader("25. 배열병합")
+        st.subheader("24. 배열병합")
         numy_87, numpy_88, numpy_89 = st.columns(3)
         with numy_87:
             arr_append_1 = np.arange(1,13).reshape(3,4)
@@ -889,7 +889,7 @@ with study_zone_1:
             arr_append_con_1
         st.divider()
         
-        st.subheader("26. VSTACK, HSTACK")    
+        st.subheader("25. VSTACK, HSTACK")    
         numpy_90, numpy_91 = st.columns(2)
         with numpy_90:
             arr_vh_1 = np.arange(1,7).reshape(2,3)
@@ -907,7 +907,7 @@ with study_zone_1:
             arr_vh_h
         st.divider()    
         
-        st.subheader("27. VSPLIT, HSPLIT")
+        st.subheader("26. VSPLIT, HSPLIT")
         numpy_92, numpy_93, numpy_94 = st.columns(3)
         with numpy_92:
             arr_vh_2 = np.arange(1,13).reshape(3,4)

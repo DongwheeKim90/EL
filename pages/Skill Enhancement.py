@@ -5,14 +5,16 @@ import matplotlib.pyplot as plt
 #헤더 
 st.title("The skill Enhancement zone✍🏻")
 st.divider()
-skill_head_1, skill_head_2 = st.columns([0.8,0.2])
+skill_head_1, skill_head_2 = st.columns([0.7,0.3])
 with skill_head_1:
     st.subheader("This page aims to enhance skills.", anchor=False, help=None)
-    st.write("You can learn about Python as a programming language and study English.")
-    st.write("EL is looking to work with individuals who are committed to continuous growth in self-development and who have a strong passion for the tasks they are assigned. Just act without overthinking.")
+    st.write("You can learn about Python as a programming language and study English. EL is looking to work with individuals who are committed to continuous growth in self-development and who have a strong passion for the tasks they are assigned. Just act without overthinking.")
     st.subheader("Don't stay stuck in the past or present.", anchor=False, help=None)
     st.write("While you revel in your past achievements or feel content with the present, someone else is continuously developing themselves to keep up with the rapidly changing world. We at EL are a collective and a company of leaders with diverse talents. We don’t just keep up with the pace of a changing world. we lead it.")
 with skill_head_2:
+    st.subheader("", anchor=False, help=None) 
+    st.subheader("", anchor=False, help=None)
+    st.subheader("", anchor=False, help=None)
     st.image("useData/EL_img/EL_STUDY_COUPLE.png")
 
 st.divider()

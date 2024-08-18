@@ -13,6 +13,8 @@ with home_col_1:
     st.write("EL is a company comprised of leaders who can maximize infinite value creation for you and your company even in a zero-base environment.")
     st.write("The danger is always in the details we take for granted. EL is constantly curious about natural situations and reality and can provide you with valuable insights and value.")
 with home_col_2:
+    st.subheader("", anchor=False, help=None)
+    st.subheader("", anchor=False, help=None)
     #-이미지
     #--스트림릿 상에서 직접 css 조정을 원할시 unsafe_allow_html 파라메터 True 지정
     st.image("useData/EL_img/HOME_EL_NEW.png")
@@ -20,6 +22,8 @@ st.divider()
 
 home_col_3, home_col_4 = st.columns([0.35,0.65])
 with home_col_3:
+    st.subheader("", anchor=False, help=None)
+    st.subheader("", anchor=False, help=None)
     st.image("useData/EL_img/data_crawling.png")
 with home_col_4:
     st.subheader("The Double S of DataCrawling", anchor=False, help=None)
@@ -38,20 +42,22 @@ with home_col_5:
     st.write("Concerned about ELOBOT or worried about the implementation cost? Just let us know, and EL Company will create a custom AI-based automation solution just for you.")
     st.markdown("###### :red[Chatbots, business automation, marketing planning, data analysis, and more.]")
 with home_col_6:
+    st.subheader("", anchor=False, help=None)
+    st.subheader("", anchor=False, help=None)
     st.image("useData/EL_img/HOME_AUTO.png")
 st.divider()
 
 home_col_6, home_col_7 = st.columns([0.35,0.65])
 with home_col_6:
+    st.subheader("", anchor=False, help=None)
+    st.subheader("", anchor=False, help=None)
     st.image("useData/EL_img/HOME_MODELING.png")
 with home_col_7:
     st.subheader("From DB modeling to website development, resolved with one key.")
-    st.write("Many companies often underestimate DB modeling when planning a website, leading to issues during development. This is why, over time, data accumulates but its quality significantly deteriorates. Moreover, implementing ML, deep learning, and AI in such situations would incur substantial costs that cannot be ignored. We understand this fact better than anyone else and handle DB modeling meticulously from the beginning to help you successfully build a website and achieve effective data analysis, machine learning, and AI implementation.")
+    st.write("Many companies underestimate the importance of DB modeling during website planning, leading to data quality issues over time. This neglect makes implementing ML, deep learning, and AI costly. We prioritize meticulous DB modeling from the start to ensure successful website development and effective data analysis, machine learning, and AI integration.")
     st.markdown("###### :red[Prioritizing the basics and executing them flawlessly is what truly defines an expert.]")
-st.divider()
-home_col_8, home_col_9, home_col_10 = st.columns([0.4,0.7, 0.15])
-with home_col_9:
-    st.markdown("### We are The EL Company.")
+
 end_container = st.container(border=True)
 with end_container:
+    st.write('<div style="text-align:center;"><h4 style="color:yellow;">We don\'t just stop at thinking. We take action and create something out of nothing. This is the spirit that EL strives for.</h4></div>', unsafe_allow_html=True)
     st.image("useData/EL_img/EL_HOME_LEADER.png")

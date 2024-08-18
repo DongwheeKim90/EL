@@ -412,7 +412,7 @@ with study_zone_1:
         st.write(arr_2_boolean)
         st.write("arr_2_boolean[[False,True,False],True]")
         arr_2_boolean[[False,True,False],True]
-        st.write("조건에 의한 배열 추출 : 6 이상인 요소")
+        st.write("조건에 의한 배열 추출 : 6 이상인 요소(arr_2_boolean[arr_2_boolean>=6])")
         arr_2_boolean[arr_2_boolean>=6]
         st.divider()
         
@@ -480,3 +480,444 @@ with study_zone_1:
             st.write("arr_cal_2 % 2")
             arrcal_2 = arr_cal_2 % 2
             arrcal_2
+        st.divider()
+        
+        st.subheader("12. dot : 두 백터를 곱하여 스칼라 산출")
+        numpy_37, numpy_38, numpy_39 = st.columns(3)
+        with numpy_37:
+            arr_dot_1 = np.array([1,2,3])
+            st.write("arr_dot_1")
+            arr_dot_1
+        with numpy_38:
+            arr_dot_2 = np.array([4,5,6])
+            st.write("arr_dot_2")
+            arr_dot_2
+        with numpy_39:
+            st.write("np.dot(arr_dot_1, arr_dot_2)")
+            dot_result = np.dot(arr_dot_1, arr_dot_2)
+            dot_result
+        st.divider()
+        st.code('''
+                [[a,b]           [[e,f]            [[ae+bg, af+bh]
+                 [c.d]]           [g,h]]            [ce+cg, cf+ch]]
+                ''')
+        numpy_40, numpy_41, numpy_42 = st.columns(3)
+        with numpy_40:
+            arr_dot_3 = np.array([[1,2],[3,4]])
+            st.write("arr_dot_3")
+            arr_dot_3
+        with numpy_41:
+            arr_dot_4 = np.array([[5,6], [7,8]])
+            st.write("arr_dot_4")
+            arr_dot_4
+        with numpy_42:
+            st.write("np.dot(arr_dot_3,arr_dot_4)")
+            dot_result_1 = np.dot(arr_dot_3,arr_dot_4)
+            dot_result_1
+        st.divider()
+        
+        st.subheader("13. 절대값, 올림, 내림, 반올림, 버림")
+        numpy_43, numpy_44, numpy_45, numpy_46, numpy_47 =st.columns(5)
+        with numpy_43:
+            arr_juldae = np.array([[-1,-2],[-3,-4]])
+            st.write("(1)절대갓")
+            arr_juldae
+            st.write("np.abs(arr_juldae)")        
+            arr_juldae_result = np.abs(arr_juldae)
+            arr_juldae_result
+        with numpy_44:
+            st.write("(2)올림")        
+            arr_target = np.array([[1.932,-2.339],
+                        [-4.145,5.206]])
+            arr_target
+            st.write("arr_target_ceil = np.ceil(arr_target)")
+            #올림
+            arr_target_ceil = np.ceil(arr_target)
+            arr_target_ceil
+        with numpy_45:
+            st.write("(3)내림")  
+            arr_target = np.array([[1.932,-2.339],
+            [-4.145,5.206]])
+            arr_target
+            st.write("arr_target_floor = np.floor(arr_target)")
+            #내림
+            arr_target_floor = np.floor(arr_target)
+            arr_target_floor
+        with numpy_46:
+            st.write("(4)반올림")  
+            arr_target = np.array([[1.932,-2.339],
+            [-4.145,5.206]])
+            arr_target
+            st.write("arr_target_round = np.round(arr_target)")
+            #내림
+            arr_target_round = np.round(arr_target)
+            arr_target_round
+        with numpy_47:
+            st.write("(5)버림")  
+            arr_target = np.array([[1.932,-2.339],
+            [-4.145,5.206]])
+            arr_target
+            st.write("arr_target_trunc = np.trunc(arr_target)")
+            #내림
+            arr_target_trunc = np.trunc(arr_target)
+            arr_target_trunc
+        st.divider()
+        
+        st.subheader("14. 2차원 배열 최소값, 최대값, 평균값, 표준편차값, 누적값, 중앙값")
+        arr_minmax = np.array([[9,8,7],[6,5,4],[3,2,1]])
+        arr_minmax
+        numpy_48, numpy_49, numpy_50 = st.columns(3)
+        with numpy_48:
+            st.write("np.min(arr_minmax)")
+            min_arr_minmax = np.min(arr_minmax)
+            min_arr_minmax
+            st.write("np.min(arr_minmax,axis=0)")
+            min_arr_minmax_0 = np.min(arr_minmax,axis=0)
+            min_arr_minmax_0
+            st.write("np.min(arr_minmax,axis=1)") 
+            min_arr_minmax_1 = np.min(arr_minmax,axis=1)
+            min_arr_minmax_1
+        with numpy_49:
+            st.write("np.max(arr_minmax)")
+            min_arr_max = np.max(arr_minmax)
+            min_arr_max
+            st.write("np.max(arr_minmax,axis=0)")
+            min_arr_max_0 = np.max(arr_minmax,axis=0)
+            min_arr_max_0
+            st.write("np.max(arr_minmax,axis=1)") 
+            min_arr_max_1 = np.max(arr_minmax,axis=1)
+            min_arr_max_1
+        with numpy_50:
+            st.write("np.mean(arr_minmax)")
+            min_arr_mean = np.mean(arr_minmax)
+            min_arr_mean
+            st.write("np.mean(arr_minmax,axis=0)")
+            min_arr_mean_0 = np.mean(arr_minmax,axis=0)
+            min_arr_mean_0
+            st.write("np.mean(arr_minmax,axis=1)") 
+            min_arr_mean_1 = np.mean(arr_minmax,axis=1)
+            min_arr_mean_1
+        numpy_51, numpy_52, numpy_53 = st.columns(3)
+        with numpy_51:
+            st.write("np.std(arr_minmax)")
+            min_arr_std = np.std(arr_minmax)
+            min_arr_std
+            st.write("np.std(arr_minmax,axis=0)")
+            min_arr_std_0 = np.std(arr_minmax,axis=0)
+            min_arr_std_0
+            st.write("np.std(arr_minmax,axis=1)") 
+            min_arr_std_1 = np.std(arr_minmax,axis=1)
+            min_arr_std_1
+        with numpy_52:
+            st.write("np.cumsum(arr_minmax)")
+            min_arr_cumsum = np.cumsum(arr_minmax)
+            min_arr_cumsum
+        with numpy_53:
+            st.write("np.median(arr_minmax)")
+            min_arr_median = np.median(arr_minmax)
+            min_arr_median
+            st.write("np.median(arr_minmax,axis=0)") 
+            min_arr_median_0 = np.median(arr_minmax,axis=0)
+            min_arr_median_0
+            st.write("np.median(arr_minmax,axis=1)") 
+            min_arr_median_1 = np.median(arr_minmax,axis=1)
+            min_arr_median_1
+        st.divider()
+        
+        st.subheader("15. 2차원 배열간 비교")
+        numpy_54, numpy_55 = st.columns(2)
+        with numpy_54:
+            arr_compare_1 = np.array([[1,2,3,4],
+                        [5,6,7,8]])
+            st.write("arr_compare_1")
+            arr_compare_1
+            arr_compare_2 = np.array([[9,10,11,12],
+                                    [13,14,15,16]])
+            st.write("arr_compare_2")
+            arr_compare_2
+        with numpy_55:
+            st.write("True면 체크, False면 공란")
+            st.write("arr_compare_1 == arr_compare_2")
+            arr_compare_1 == arr_compare_2
+            st.write("np.equal(arr_compare_1, arr_compare_2)")
+            equal = np.equal(arr_compare_1, arr_compare_2)
+            equal
+            st.write("arr_compare_1 >= arr_compare_2")
+            arr_compare_1 >= arr_compare_2
+            st.write("arr_compare_1 <= arr_compare_2")
+            arr_compare_1 <= arr_compare_2
+        st.divider()
+        
+        st.subheader("16. 삼각함수")
+        st.write("np.array([[1,2,3], [4,5,6], [7,8,9]])")
+        arr_triangle = np.array([[1,2,3],
+                        [4,5,6],
+                        [7,8,9]])
+        arr_triangle
+        numpy_56, numpy_57, numpy_58 = st.columns(3)
+        with numpy_56:
+            st.write("np.sin(arr_triangle)")
+            sin_arr = np.sin(arr_triangle)
+            sin_arr
+        with numpy_57:
+            st.write("np.cos(arr_triangle)")
+            sin_cos = np.cos(arr_triangle)
+            sin_cos
+        with numpy_58:
+            st.write("np.tan(arr_triangle)")
+            tan_arr = np.tan(arr_triangle)
+            tan_arr
+        st.divider()
+        
+        st.subheader("17. Broadcasting : 배열간 shape이 달라도 연산 가능")
+        numpy_59, numpy_60 = st.columns(2)
+        with numpy_59:
+            arr_broad_1 = np.array([[1,2,3],
+                        [4,5,6],
+                        [7,8,9]])
+            arr_broad_2 = np.array([1,2,3])
+            st.write("np.array([[1,2,3], [4,5,6], [7,8,9]])")
+            arr_broad_1
+            st.write("np.array([1,2,3])")
+            arr_broad_2
+            st.write("arr_broad_1 + arr_broad_2")
+            broad12_result = arr_broad_1 + arr_broad_2
+            broad12_result
+        with numpy_60:
+            arr_broad_3 = np.array([[1,1,1]])
+            arr_broad_4 = np.array([[10], [10], [10]])
+            st.write("np.array([[1,1,1]])")
+            arr_broad_3
+            st.write("np.array([[10], [10], [10]])")
+            arr_broad_4
+            st.write("arr_broad_3 + arr_broad_4")
+            broad34_result = arr_broad_3 + arr_broad_4
+            broad34_result
+        st.divider()
+        
+        st.subheader("18. N차원 배열의 정렬")
+        numpy_61, numpy_62, numpy_63 = st.columns(3)
+        with numpy_61:
+            arr_sort = np.random.randint(100,size=50)
+            st.write("arr_sort = np.random.randint(100,size=50)")
+            arr_sort
+        with numpy_62:
+            asc_arr_sort = np.sort(arr_sort)
+            st.write("np.sort(arr_sort)")
+            asc_arr_sort
+        with numpy_63:
+            desc_arr_sort = np.sort(arr_sort)[::-1]
+            st.write("np.sort(arr_sort)[::-1]")
+            desc_arr_sort
+        numpy_64, numpy_65, numpy_66 = st.columns(3)
+        with numpy_64:
+            arr_sort_2 = np.random.randint(9, size=(3,3))
+            st.write("arr_sort_2 = np.random.randint(9, size=(3,3))")
+            arr_sort_2
+        with numpy_65:
+            arr_sort_2_0 = np.sort(arr_sort_2, axis=0)
+            st.write("np.sort(arr_sort_2, axis=0)")
+            arr_sort_2_0
+        with numpy_66:
+            arr_sort_2_1 = np.sort(arr_sort_2, axis=1)
+            st.write("np.sort(arr_sort_2, axis=1)")
+            arr_sort_2_1
+        st.divider()
+        
+        st.subheader("19. argsort : 배열의 원래 인덱스를 반환")
+        numpy_67, numpy_68 = st.columns(2)
+        with numpy_67:
+            argsort_arr = np.random.randint(9, size=(3,3))
+            st.write("argsort_arr = np.random.randint(9, size=(3,3))")
+            argsort_arr
+        with numpy_68:
+            argsort_arr_sort = np.sort(argsort_arr,axis=0)
+            st.write("np.sort(argsort_arr,axis=0)")
+            argsort_arr_sort
+            
+            argsort_arr_sort_origin = np.argsort(argsort_arr,axis=0)
+            st.write("np.argsort(argsort_arr, axis=0)")
+            argsort_arr_sort_origin
+        st.divider()
+        
+        st.subheader("20. N차원 배열의 형태변경")
+        st.write('''
+                    reshape(): 원본 배열의 총 요소 수를 변경하지 않으며, 데이터가 보존됩니다. 새로운 배열은 원본 배열의 뷰로, 같은 데이터를 공유합니다.
+                    resize(): 배열의 크기를 조정하며, 필요하면 데이터가 반복되거나 잘려나갑니다. 새로운 배열이 생성되며, 원본 배열과 데이터가 다를 수 있습니다.
+                 ''')
+        numpy_68, numpy_69, numpy_70 = st.columns(3)
+        with numpy_68:
+            arr_reshape_1 = np.arange(12)
+            st.write("arr_reshape_1 = np.arange(12)")
+            st.write(f"차원 : {arr_reshape_1.ndim}")
+            arr_reshape_1
+        with numpy_69:
+            arr_reshape_2 = arr_reshape_1.reshape(6,2)
+            st.write("arr_reshape_2 = arr_reshape_1.reshape(6,2)")
+            st.write(f"차원 : {arr_reshape_2.ndim}")
+            arr_reshape_2
+        with numpy_70:
+            arr_reshape_3 = arr_reshape_1.reshape((2,3,2))
+            st.write("arr_reshape_3 = arr_reshape_1.reshape((2,3,2))")
+            st.write(f"차원 : {arr_reshape_3.ndim}")
+            
+        numpy_71, numpy_72, numpy_73 = st.columns(3)
+        with numpy_71:
+            arr_resize_1 = np.arange(12)
+            st.write("arr_resize_1 = np.arange(12)")
+            arr_resize_1
+        with numpy_72:
+            arr_resize_1.resize(3,4)
+            st.write("arr_resize_1.resize(3,4)")
+            arr_resize_1
+        with numpy_73:
+            st.write("1차원으로 다시 변경 : arr_resize_1.ravel()")
+            arr_resize_1_rabel = arr_resize_1.ravel()
+            arr_resize_1_rabel
+        st.divider()
+        
+        st.subheader("21. 차원추가")
+        numpy_74, numpy_75, numpy_76 = st.columns(3)
+        with numpy_74:
+            arr_expand = np.array([1,2])
+            st.write("arr_expand = np.array([1,2])")
+            arr_expand
+            st.write(f"차원 : {arr_expand.ndim}")
+        with numpy_75:
+            st.write("np.expand_dims(arr_expand, axis=1)")
+            arr_expand_1 = np.expand_dims(arr_expand, axis=1)
+            st.write(arr_expand_1)
+            st.write(f"차원 : {arr_expand_1.ndim}")
+        with numpy_76:
+            st.write("np.expand_dims(arr_expand, axis=0)")
+            arr_expand_0 = np.expand_dims(arr_expand, axis=0)
+            st.write(arr_expand_0)
+            st.write(f"차원 : {arr_expand_0.ndim}")
+        st.divider()    
+            
+        st.subheader("22. 배열제거 후 차원축소")
+        numpy_76, numpy_77, numpy_78 = st.columns(3)
+        with numpy_76:
+            st.code('''
+                    arr_squeeze_1 = np.array([[1,2,3]])
+                    np.squeeze(arr_squeeze_1,axis=0)
+                    ''')
+        with numpy_77:
+            st.code('''
+                    arr_squeeze_2 = np.array([[[1],
+                                            [2],
+                                            [3]]])
+                    np.squeeze(arr_squeeze_2, axis=0)
+                    ''')
+        with numpy_78:
+            st.code('''
+                    arr_squeeze_3 = np.array([[[1,2,3]]])
+                    np.squeeze(arr_squeeze_3, axis=1)                    
+                    ''')
+        st.divider()    
+            
+        st.subheader("23. 전치행렬")
+        numpy_79, numpy_80 = st.columns(2)
+        with numpy_79:
+            arr_junchi_1 = np.array([[1,2,3],
+                       [4,5,6],
+                       [7,8,9]])
+            st.write('arr_junchi_1 = np.array([[1,2,3], [4,5,6], [7,8,9]])')
+            arr_junchi_1
+        with numpy_80:
+            arr_junchi_1_result = np.transpose(arr_junchi_1)
+            st.write('np.transpose(arr_junchi_1)')
+            arr_junchi_1_result
+        
+        numpy_81, numpy_82 = st.columns(2)
+        with numpy_81:
+            arr_junchi_2 = np.array([[1,2],
+                       [3,4],
+                       [5,6]])
+            st.write('arr_junchi_2 = np.array([[1,2], [3,4], [5,6]])')
+            arr_junchi_2
+        with numpy_82:
+            arr_junchi_2_result = np.transpose(arr_junchi_2)
+            st.write('np.transpose(arr_junchi_2)')
+            arr_junchi_2_result
+        st.divider()    
+        
+        st.subheader("24. 배열 특정 위치에 값 추가")
+        numpy_83, numpy_84 = st.columns(2) 
+        with numpy_83:
+            arr_add_value_1 = np.arange(1,9)
+            st.write("arr_add_value_1 = np.arange(1,9)")
+            arr_add_value_1
+        with numpy_84:
+            np.insert(arr_add_value_1,2,10)
+            st.write("np.insert(arr_add_value_1,2,10)")
+            arr_add_value_1_result = np.insert(arr_add_value_1,2,10)
+            arr_add_value_1_result
+        numpy_85, numpy_86 = st.columns(2) 
+        with numpy_85:
+            arr_add_value_2 = np.arange(1,13)
+            st.write("arr_add_value_2 = np.arange(1,13)")
+            arr_add_value_2
+        with numpy_86:
+            arr_add_value_2_0 = np.insert(arr_add_value_2,2,50,axis=0)
+            st.write("np.insert(arr_add_value_2,2,50,axis=0)")
+            arr_add_value_2_0
+        st.divider()
+        
+        st.subheader("25. 배열병합")
+        numy_87, numpy_88, numpy_89 = st.columns(3)
+        with numy_87:
+            arr_append_1 = np.arange(1,13).reshape(3,4)
+            arr_append_2 = np.arange(13,25).reshape(3,4)
+            st.write("arr_append_1 = np.arange(1,13).reshape(3,4)")
+            arr_append_1
+            st.write("arr_append_2 = np.arange(13,25).reshape(3,4)")
+            arr_append_2
+        with numpy_88:
+            arr_append_120 = np.append(arr_append_1, arr_append_2, axis=0)
+            st.write("arr_append_120 = np.append(arr_append_1, arr_append_2, axis=0)")
+            arr_append_120
+            st.write("arr_append_con_0 = np.concatenate([arr_append_1, arr_append_2], axis=0)")
+            arr_append_con_0 = np.concatenate([arr_append_1, arr_append_2], axis=0)
+            arr_append_con_0
+        with numpy_89:
+            arr_append_121 = np.append(arr_append_1, arr_append_2, axis=1)
+            st.write("arr_append_121 = np.append(arr_append_1, arr_append_2, axis=1)")
+            arr_append_121
+            st.write("arr_append_con_1 = np.concatenate([arr_append_1, arr_append_2], axis=1)")
+            arr_append_con_1 = np.concatenate([arr_append_1, arr_append_2], axis=1)
+            arr_append_con_1
+        st.divider()
+        
+        st.subheader("26. VSTACK, HSTACK")    
+        numpy_90, numpy_91 = st.columns(2)
+        with numpy_90:
+            arr_vh_1 = np.arange(1,7).reshape(2,3)
+            arr_vh_2 = np.arange(7,13).reshape(2,3)
+            st.write("arr_vh_1 = np.arange(1,7).reshape(2,3)")
+            arr_vh_1
+            st.write("arr_vh_2 = np.arange(7,13).reshape(2,3)")
+            arr_vh_2
+        with numpy_91:
+            arr_vh_v = np.vstack((arr_vh_1,arr_vh_2))
+            arr_vh_h = np.hstack((arr_vh_1,arr_vh_2))
+            st.write("arr_vh_v = np.vstack((arr_vh_1,arr_vh_2))")
+            arr_vh_v
+            st.write("arr_vh_h = np.hstack((arr_vh_1,arr_vh_2))")
+            arr_vh_h
+        st.divider()    
+        
+        st.subheader("27. VSPLIT, HSPLIT")
+        numpy_92, numpy_93, numpy_94 = st.columns(3)
+        with numpy_92:
+            arr_vh_2 = np.arange(1,13).reshape(3,4)
+            st.write("arr_vh_2 = np.arange(1,13).reshape(3,4)")
+            arr_vh_2
+        with numpy_93:
+            arr_vh_2_v = np.vsplit(arr_vh_2,3)
+            st.write("arr_vh_2_v = np.vsplit(arr_vh_2,3)")
+            arr_vh_2_v
+        with numpy_94:
+            arr_vh_2_h = np.hsplit(arr_vh_2,2)
+            st.write("arr_vh_2_h = np.hsplit(arr_vh_2,2)")
+            arr_vh_2_h

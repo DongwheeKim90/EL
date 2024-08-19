@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -25,17 +26,519 @@ with study_zone_1:
     select_value_python = st.radio("Choice Python library what you want.",
             [":rainbow[***PANDAS***]",":rainbow[***NUMPY***]",":rainbow[***Pythorch***]"]
             )
+    
+# PANDAS section
     if select_value_python == ":rainbow[***PANDAS***]":
-        st.subheader("Pandas Intro")        
-    
-    
-    
-    
-    
-    
-    
+        st.subheader("About PANDAS")        
+        st.write('''Pandas is a widely-used Python library for data manipulation and analysis. It's especially useful for handling tabular data, similar to Excel spreadsheets, and provides a data structure called DataFrame. With Pandas, you can easily read, write, filter, and manipulate data. It's a powerful tool for data analysis, preprocessing, statistical analysis, and more.''')
+        st.write("(1)Data Reading/Writing: You can easily read from and write to various data formats such as CSV, Excel files, SQL databases, and more.")
+        st.write("(2)Data Filtering and Selection: You can select or filter data based on specific conditions.")
+        st.write("(3)Data Transformation: You can transform data, add or remove columns, handle missing values, and more.")
+        st.write("(4)Grouping and Aggregation: You can group data and calculate aggregate statistics or summaries.")
+        st.write("(5)Time Series Data Handling: Pandas has powerful features for working with date and time data.")
+        st.write("(6)Install library")
+        st.code('''
+                pip install pandas
+                ''')
+        st.write("(7)Import library")
+        st.code('''
+                import pandas as pd
+                ''')
+        st.write("참고링크 : https://github.com/minsuk-heo/pandas/blob/master/Pandas_Cheatsheet.ipynb")
+        st.divider()
+
+        st.subheader("1. 데이터 불러오기 및 조회")
+        pandas_col_1, pandas_col_2 = st.columns(2)
+        with pandas_col_1:
+            st.code('''
+            friend_df = pd.read_csv("경로/friend_list.csv")
+            st.dataframe(friend_df)
+            ''')
+            friend_df = pd.read_csv("useData/EL_data/pandas/friend_list.csv")
+            st.dataframe(friend_df, use_container_width=True)
+        with pandas_col_2:
+            st.code('''
+            head_friend_df = friend_df.head()
+            tail_friend_df = friend_df.tail()
+            ''')
+            head_friend_df = friend_df.head()
+            tail_friend_df = friend_df.tail()
+            st.write("(1) 상위 5개행 조회", anchor=False, help=None)
+            st.dataframe(head_friend_df, use_container_width=True)
+            st.write("(2) 하위 5개행 조회")
+            st.dataframe(tail_friend_df, use_container_width=True)
+        st.divider()
+
+        st.subheader("2. 데이터프레임과 시리즈", anchor=False, help=None)
+        st.write("데이터 프레임은 2개 이상의 시리즈로 구성돼어 있는 형태임. Series는 1차원 배열과 같은 객체로, 정수, 문자열, 실수 등 어떤 데이터 유형도 담을 수 있음. DataFrame은 2차원 테이블 형태의 데이터 구조로, 여러 개의 Series로 구성되며 DataFrame의 각 열이 Series임.")
+        pandas_col_3, pandas_col_4 = st.columns(2)
+        with pandas_col_3:
+            st.code('''
+            friend_df = pd.read_csv("경로/friend_list.csv")
+            st.dataframe(friend_df)
+            ''')
+            friend_df = pd.read_csv("useData/EL_data/pandas/friend_list.csv")
+            st.dataframe(friend_df, use_container_width=True)
+        with pandas_col_4:
+            st.write("(1)name 열 타입")
+            st.code("type(friend_df['name'])")
+            st.write(f"{type(friend_df['name'])}")
+            st.write("(2)age 열 타입")
+            st.code("type(friend_df['age'])")
+            st.write(f"{type(friend_df['age'])}")
+            st.write("(3)friend_df 타입")
+            st.code("type(friend_df)")
+            st.write(f"{type(friend_df)}")
+        st.divider()
+
+        st.subheader("3. 데이터프레임과 시리즈 만들기", anchor=False, help=None)
+        pandas_col_5, pandas_col_6 = st.columns(2)
+        with pandas_col_5:
+            st.write("(1) 데이터프레임 생성")
+            st.code('''
+                a_df = pd.DataFrame({
+                "컬럼1":["a",'b',"c"],
+                "컬럼2":[1,2,3]
+            })
+                    ''')
+            a_df = pd.DataFrame({
+                "컬럼1":["a",'b',"c"],
+                "컬럼2":[1,2,3]
+            })
+            st.dataframe(a_df, use_container_width=True)
+            st.write("(2) 딕셔너리로 데이터프레임 생성")
+            st.code('''
+                    friend_dict_list = [
+                                {"name":"john","age":25, "job":"sturdent"},
+                                {"name":"nate","age":305, "job":"teacher"}
+                                ]
+                    new_f_dict = pd.DataFrame(friend_dict_list)
+                    ''')
+            friend_dict_list = [
+                                {"name":"john","age":25, "job":"sturdent"},
+                                {"name":"nate","age":305, "job":"teacher"}
+                                ]
+            new_f_dict = pd.DataFrame(friend_dict_list)
+            st.dataframe(new_f_dict, use_container_width=True)
+        with pandas_col_6:
+            st.write("(3) 시리즈 생성")
+            st.code('''
+                    a1 = ["a","b","c"]
+                    col1 = pd.Series(a1)
+                    b1 = ["d","e","f"]
+                    col2 = pd.Series(b1)
+                    ''')
+            a1 = ["a","b","c"]
+            col1 = pd.Series(a1)
+            b1 = ["d","e","f"]
+            col2 = pd.Series(b1)
+            st.write(f"{type(col1)}")
+            st.write(col1)
+            st.write(f"{type(col2)}")
+            st.write(col2)
+        st.divider()
+
+        st.subheader("4. 컬럼명(헤더) 없는 데이터프레임 불러오기 및 컬럼 지정", anchor=False, help=None)
+        st.write("컬럼이 지정되지 않은 CSV 파일을 열면 행이 밀려 컬럼명으로 들어감. 이를 방지하기 위해 아래와 같이 진행.")
+        pandas_col_7, pandas_col_8 = st.columns(2)
+        with pandas_col_7:
+            nohead_df = pd.read_csv("useData/EL_data/pandas/friend_list_no_head.csv", header=None)
+            st.write("(1) 데이터 불러오기")
+            st.code('''
+                   st.dataframe(nohead_df, use_container_width=True)
+                    ''')
+            st.dataframe(nohead_df, use_container_width=True)
+            st.write("(2) 컬럼명 지정")
+            st.code('''
+                    nohead_df.columns = ["name", "age", "job"]  
+                    ''')
+            nohead_df.columns = ["name", "age", "job"]
+            st.dataframe(nohead_df, use_container_width=True)
+        with pandas_col_8:
+            st.write("(1) 데이터 불러올때 직접 지정하기")
+            st.code('''
+                    direct_nohead = pd.read_csv("경로/friend_list_no_head.csv", header=None, names=["name","age","job"])
+                   ''')
+            direct_nohead = pd.read_csv("useData/EL_data/pandas/friend_list_no_head.csv", header=None, names=["name","age","job"])
+            st.dataframe(direct_nohead, use_container_width=True)
+        st.divider()
+        
+        st.subheader("5. Index를 활용하여 행 선택", anchor=False, help=None)
+        pandas_col_9, pandas_col_10 = st.columns(2)
+        with pandas_col_9:
+            st.write("(1) 데이터 불러오기")
+            friend_raw_data = pd.read_csv("useData/EL_data/pandas/friend_list.csv")
+            st.dataframe(friend_raw_data, use_container_width=True)
+        with pandas_col_10:
+            st.write("(2) 인덱스 활용해서 특정 행 조회")
+            st.code('''
+                    friend_raw_data.loc[3]
+                    ''')
+            st.dataframe(friend_raw_data.loc[3],use_container_width=True)
+            st.write("(3) 인덱스 활용해서 특정범위 행 조회(loc, iloc 활용하여 특정 위치의 데이터 추출가능)")
+            st.code('''friend_raw_data[1:3]''')
+            st.dataframe(friend_raw_data[1:3],use_container_width=True)
+            st.code('''friend_raw_data.loc[[0,2]]''')
+            st.dataframe(friend_raw_data.loc[[0,2]],use_container_width=True)
+        st.divider()
+
+        st.subheader("6. 필드(컬럼) 조건을 활용한 데이터 조회", anchor=False, help=None)
+        pandas_col_11, pandas_col_12 = st.columns(2)
+        with pandas_col_11:
+            st.write("(1) 데이터 불러오기")
+            friend_raw_data = pd.read_csv("useData/EL_data/pandas/friend_list.csv")
+            st.dataframe(friend_raw_data, use_container_width=True)
+        with pandas_col_12:
+            st.write("(2) age 가 25 이상인 데이터")
+            st.code('''
+                    friend_raw_data[friend_raw_data['age']>=25]
+                    ''')
+            st.dataframe(friend_raw_data[friend_raw_data['age']>=25])
+            st.write("(3) age 가 25 보다 위이고 name이 Nate인 데이터")
+            st.code('''
+                    friend_raw_data[(friend_raw_data["age"]>25) & (friend_raw_data["name"]=="Nate")]
+                    ''')
+            st.dataframe(friend_raw_data[(friend_raw_data["age"]>25) & (friend_raw_data["name"]=="Nate")])
+        st.divider()
+
+        st.subheader("7. iloc를 활용한 데이터 조회", anchor=False, help=None)
+        pandas_col_13, pandas_col_14 = st.columns(2)
+        with pandas_col_13:
+            st.write("(1) 데이터 불러오기")
+            friend_raw_data = pd.read_csv("useData/EL_data/pandas/friend_list.csv")
+            st.dataframe(friend_raw_data, use_container_width=True)
+        with pandas_col_14:
+            st.write("**iloc는 loc와 다르게 행/열의 인덱스를 활용하여 데이터를 조회하는 방식임.")
+            st.write("(2) 전체 행과 첫번째 열, 세번째 열")
+            st.code('''
+                    friend_raw_data.iloc[:,[0,2]]
+                    ''')
+            st.dataframe(friend_raw_data.iloc[:,[0,2]])
+            st.write("(3) 첫번째 - 세번째 행과 세번째 열")
+            st.code('''
+                    friend_raw_data.iloc[0:2,2]
+                    ''')
+            st.dataframe(friend_raw_data.iloc[0:2,2])
+            st.write("(3) 세번째 행과 세번째 열")
+            st.code('''
+                    friend_raw_data.iloc[2, 2]
+                    ''')
+            st.text(friend_raw_data.iloc[2, 2])
+        st.divider()
+
+        st.subheader("8. filter를 활용한 데이터 조회", anchor=False, help=None)
+        pandas_col_15, pandas_col_16 = st.columns(2)
+        with pandas_col_15:
+            st.write("(1) 데이터 불러오기")
+            friend_raw_data = pd.read_csv("useData/EL_data/pandas/friend_list.csv")
+            st.dataframe(friend_raw_data, use_container_width=True)
+        with pandas_col_16:
+            st.write("(2) name과 age 필드 불러오기")
+            st.code('''
+                    #filter 사용
+                    friend_raw_data.filter(items=["name","age"])
+                    ''')
+            st.dataframe(friend_raw_data.filter(items=["name","age"]))
+            st.code('''
+                    #filter 외 다른 방법
+                    friend_raw_data[["name","age"]]
+                    ''')
+            st.dataframe(friend_raw_data[["name","age"]])
+            
+            st.write("(3) 필드명이 a가 포함됀 열")
+            st.code('''
+                    friend_raw_data.filter(like="a", axis=1)
+                    ''')
+            st.dataframe(friend_raw_data.filter(like="a", axis=1))
+
+            st.write("(4) 필드명이 b가 포함됀 열을 정규표현으로 추출")
+            st.code('''
+                    friend_raw_data.filter(regex='b$',axis=1)
+                    ''')
+            st.dataframe(friend_raw_data.filter(regex='b$',axis=1))
+        st.divider()
+
+        st.subheader("9. drop row", anchor=False, help=None)
+        pandas_col_17, pandas_col_18 = st.columns(2)
+        with pandas_col_17:
+            st.write("(1) 데이터 불러오기 **name 필드를 인덱스로 지정하여 부름")
+            friend_raw_data = pd.read_csv("useData/EL_data/pandas/friend_list.csv", index_col="name")
+            st.dataframe(friend_raw_data, use_container_width=True)
+        with pandas_col_18:
+            st.write("(2) John, Jenny, Julia 행 제거")
+            st.code('''
+                    friend_raw_data.drop(["John", "Jenny", "Julia"])
+                    ''')
+            st.dataframe(friend_raw_data.drop(["John", "Jenny", "Julia"]), use_container_width=True)
+            st.write("(3) drop + inplace : inplace=True 는 현재 데이터에 바로 적용함을 의미")
+            st.code('''
+                    friend_raw_data.drop(['Brian'], inplace = True)
+                    friend_raw_data
+                    ''')
+            friend_raw_data.drop(['Brian'], inplace = True)
+            st.dataframe(friend_raw_data, use_container_width=True)
+        st.divider()
+
+        st.subheader("10. drop/add/update column", anchor=False, help=None)
+        pandas_col_19, pandas_col_20 = st.columns(2)
+        with pandas_col_19:
+            st.write("(1) 데이터 불러오기")
+            friend_raw_data = pd.read_csv("useData/EL_data/pandas/friend_list.csv")
+            st.dataframe(friend_raw_data, use_container_width=True)
+        with pandas_col_20:
+            st.write("(2) age 컬럼 drop")
+            friend_raw_data = friend_raw_data.drop('age', axis=1)
+            st.code('''friend_raw_data.drop('age', axis=1)''')
+            st.dataframe(friend_raw_data,use_container_width=True)
+            st.write("(3) salary 컬럼 생성")
+            st.code('''
+                    friend_raw_data["salary"] = None
+                    ''')
+            friend_raw_data["salary"] = None
+            st.dataframe(friend_raw_data,use_container_width=True)
+            st.write("(4) salary 컬럼 값 수정")
+            st.code('''
+                    friend_raw_data["salary"] = 10000        
+                    ''')
+            friend_raw_data["salary"] = 10000
+            st.dataframe(friend_raw_data)
+            st.write("(5) numpy를 활용하여 업데이트 : np.where()")
+            st.code('''
+                    friend_raw_data["salary"] = np.where(friend_raw_data["job"] == 'developer', 1000000, 500 )
+                    ''')
+            st.dataframe(friend_raw_data)
+        st.divider()
+
+        st.subheader("11. 컬럼간 연산", anchor=False, help=None)
+        pandas_col_21, pandas_col_22 = st.columns(2)
+        with pandas_col_21:
+            st.write("(1) 데이터프레임")
+            new_df = pd.DataFrame({
+                "name": ["a","b","c","d","e"],
+                "mid_score" : [20,30,40,50,60],
+                "final_score": [50,60,70,80,90]
+            })
+            st.dataframe(new_df,use_container_width=True)
+        with pandas_col_22:
+            st.write("(2) 신규컬럼 생성")
+            st.code('''
+                    new_df["total"] = new_df["mid_score"]+new_df["final_score"]
+                    new_df["avg_score"] = new_df["total"] / 2
+                    ''')
+            new_df["total"] = new_df["mid_score"]+new_df["final_score"]
+            new_df["avg_score"] = new_df["total"] / 2
+            st.dataframe(new_df, use_container_width=True)
+        st.divider()
+
+        st.subheader("12. apply 함수", anchor=False, help=None)
+        pandas_col_23, pandas_col_24 = st.columns(2)
+        with pandas_col_23:
+            st.write("(1) 데이터프레임")
+            date_df = pd.DataFrame({
+                "YYYY-MM-DD" : ["2001-01-01", "2002-02-02", "2003-03-03", "2004-04-04", "2005-05-05"]
+            })
+            st.dataframe(date_df, use_container_width=True)
+            st.write("(2) 함수정의")
+            st.code('''
+                    #년도 뽑기
+                    def extract_year(row):
+                    return row.split('-')[0]                    
+                    #나이 구하기
+                    def get_old(row, current_year):
+                    return int(row) - current_year
+                    ''')
+            def extract_year(row):
+                return row.split('-')[0]
+            
+            def get_old(row, current_year):
+                return int(row) - current_year
+
+        with pandas_col_24:
+            st.write("(3) apply함수를 활용하여 데이터 신규 필드 생성")
+            st.code('''
+                    date_df[신규컬럼명] = date_df["YYYY-MM-DD"].apply(함수명)
+                    ''')
+            date_df["YYYY"] = date_df["YYYY-MM-DD"].apply(extract_year)
+            st.dataframe(date_df, use_container_width=True)
+            st.code('''
+                    date_df["YYYY"].apply(get_old, current_year=2000)
+                    ''')
+            date_df["age"] = date_df["YYYY"].apply(get_old, current_year=2000)
+            st.dataframe(date_df, use_container_width=True)
+        st.divider()
+
+        st.subheader("13. Map 함수-1", anchor=False, help=None)
+        pandas_col_25, pandas_col_26 = st.columns(2)
+        with pandas_col_25:
+            st.write("(1) 데이터프레임")
+            date_df = pd.DataFrame({
+                "YYYY-MM-DD" : ["2001-01-01", "2002-02-02", "2003-03-03", "2004-04-04", "2005-05-05"]
+            })
+            st.dataframe(date_df, use_container_width=True)
+            st.write("(2) 함수정의")
+            st.code('''
+                    #년도 뽑기
+                    def extract_year(row):
+                    return row.split('-')[0]                    
+                    #나이 구하기
+                    def get_old(row, current_year):
+                    return int(row) - current_year
+                    ''')
+            def extract_year(row):
+                return row.split('-')[0]
+            def get_old(row, current_year):
+                return int(row) - current_year
+            
+        with pandas_col_26:
+            st.write("(3) map + 함수")
+            st.code('''
+                    date_df['year'] = date_df['YYYY-MM-DD'].map(extract_year)
+                    ''')
+            date_df['year'] = date_df['YYYY-MM-DD'].map(extract_year)
+            st.dataframe(date_df,use_container_width=True)
+            st.code('''
+                    ate_df["age"] = date_df['year'].map(lambda x: get_old(x, current_year=1990))
+                    ''')
+            date_df["age"] = date_df['year'].map(lambda x: get_old(x, current_year=1990))
+            st.dataframe(date_df,use_container_width=True)
+        st.divider()
+
+        st.subheader("14. Map 함수-2", anchor=False, help=None)
+        pandas_col_27, pandas_col_28 = st.columns(2)
+        with pandas_col_27:
+            st.write("(1) 데이터프레임")
+            job_list = [{'age': 20, 'job': 'student'},
+                    {'age': 30, 'job': 'developer'},
+                    {'age': 30, 'job': 'teacher'}]
+            job_df = pd.DataFrame(job_list)
+            st.dataframe(job_df, use_container_width=True)
+        with pandas_col_28:
+            st.write("(2) map 함수 활용")
+            st.code('''
+                    job_df["job_code"] = job_df.job.map({"student":1,"developer":2,"teacher":3})
+                    st.dataframe(job_df, use_container_width=True)
+                    ''')
+            job_df["job_code"] = job_df.job.map({"student":1,"developer":2,"teacher":3})
+            st.dataframe(job_df, use_container_width=True)
+        st.divider()
+
+        st.subheader("15. Applymap", anchor=False, help=None)
+        pandas_col_29, pandas_col_30 = st.columns(2)
+        with pandas_col_29:
+            st.write("(1) 데이터프레임 생성")
+            x_y = [{'x': 5.5, 'y': -5.6},
+                    {'x': -5.2, 'y': 5.5},
+                    {'x': -1.6, 'y': -4.5}]
+            applymap_df = pd.DataFrame(x_y)
+            st.dataframe(applymap_df,use_container_width=True)
+        with pandas_col_30:
+            st.write("(2) applymap 적용")
+            st.code('''
+                    applymap_df = applymap_df.applymap(np.around)
+                    ''')
+            applymap_df = applymap_df.applymap(np.around)
+            st.dataframe(applymap_df, use_container_width=True)
+        st.divider()
+
+        st.subheader("16. Group by", anchor=False, help=None)
+        pandas_col_31, pandas_col_32 = st.columns(2)
+        with pandas_col_31:
+            st.write("(1) 데이터프레임 생성")
+            student_list = [{'name': 'John', 'major': "Computer Science", 'sex': "male"},
+                            {'name': 'Nate', 'major': "Computer Science", 'sex': "male"},
+                            {'name': 'Abraham', 'major': "Physics", 'sex': "male"},
+                            {'name': 'Brian', 'major': "Psychology", 'sex': "male"},
+                            {'name': 'Janny', 'major': "Economics", 'sex': "female"},
+                            {'name': 'Yuna', 'major': "Economics", 'sex': "female"},
+                            {'name': 'Jeniffer', 'major': "Computer Science", 'sex': "female"},
+                            {'name': 'Edward', 'major': "Computer Science", 'sex': "male"},
+                            {'name': 'Zara', 'major': "Psychology", 'sex': "female"},
+                            {'name': 'Wendy', 'major': "Economics", 'sex': "female"},
+                            {'name': 'Sera', 'major': "Psychology", 'sex': "female"}
+                    ]
+            student_df = pd.DataFrame(student_list, columns = ['name', 'major', 'sex'])
+            st.dataframe(student_df, use_container_width=True)            
+        with pandas_col_32:
+            st.write("(2) major 그룹바이")
+            st.code('''
+                    groupby_major = student_df.groupby('major')
+                    groupby_major.groups
+                    ''')
+            groupby_major = student_df.groupby('major')
+            groupby_major.groups
+            st.code('''
+                    groupby_major.count()
+                    ''')
+            st.dataframe(groupby_major.count(), use_container_width=True)
+        st.divider()
+
+        st.subheader("17. Null, NaN 처리", anchor=False, help=None)
+        pandas_col_33, pandas_col_34 = st.columns(2)
+        with pandas_col_33:
+            st.write("(1) 데이터프레임 생성")
+            school_id_list = [{'name': 'John', 'job': "teacher", 'age': 40},
+                            {'name': 'Nate', 'job': "teacher", 'age': None},
+                            {'name': 'Yuna', 'job': None, 'age': 37},
+                            {'name': 'Abraham', 'job': "student", 'age': None},
+                            {'name': 'Brian', 'job': "student", 'age': 12},
+                            {'name': 'Janny', 'job': None, 'age': 11},
+                            {'name': 'Nate', 'job': "teacher", 'age': None},
+                            {'name': 'John', 'job': "student", 'age': None}
+                    ]
+            school_df = pd.DataFrame(school_id_list, columns = ['name', 'job', 'age'])
+            st.dataframe(school_df, use_container_width=True)     
+        with pandas_col_34:
+            st.write("(2) isna() : null 또는 None은 True 반환")
+            st.code('''
+                    school_df.isna()
+                    ''')
+            st.dataframe(school_df.isna(), use_container_width=True)
+            st.write("(3) isnull() : null 또는 None은 True 반환")
+            st.code('''
+                    school_df.isnull()
+                    ''')
+            st.dataframe(school_df.isnull(), use_container_width=True)
+            st.write("(4) 특정열의 Null 또는 None 값 채우기")
+            st.code('''
+                    school_df["age"] = school_df["age"].fillna(0)
+                    school_df["job"] = school_df["job"].fillna("student")
+                    ''')
+            school_df["age"] = school_df["age"].fillna(0)
+            school_df["job"] = school_df["job"].fillna("student")
+            st.dataframe(school_df, use_container_width=True)
+        st.divider()
+
+        st.subheader("18. concat", anchor=False, help=None)
+        pandas_col_35, pandas_col_36 = st.columns(2)
+        with pandas_col_35:
+            st.write("(1) 데이터프레임")
+            l1 = [{'name': 'John', 'job': "teacher"},
+                {'name': 'Nate', 'job': "student"},
+                {'name': 'Jack', 'job': "developer"}]
+            l2 = [{'age': 25, 'country': "U.S"},
+                {'age': 30, 'country': "U.K"},
+                {'age': 45, 'country': "Korea"}]
+            st.write("**데이터프레임 l1")
+            l1 = pd.DataFrame(l1)
+            l2 = pd.DataFrame(l2)
+            st.dataframe(l1, use_container_width=True)
+            st.write("**데이터프레임 l2")
+            st.dataframe(l2, use_container_width=True)
+
+        with pandas_col_36:
+            st.write("(2) 병합 : axis=1 은 열 방향, axis=0 은 행 방향")
+            st.code('''
+                    result_1 = pd.concat([l1, l2], axis=1, ignore_index=True)
+                    result_2 = pd.concat([l1, l2], axis=0, ignore_index=True)                    
+                    ''')
+            result_1 = pd.concat([l1, l2], axis=1, ignore_index=True)
+            st.dataframe(result_1)
+            result_2 = pd.concat([l1, l2], axis=0, ignore_index=True)
+            st.dataframe(result_2)
+
+# Numpy Section
     elif select_value_python == ":rainbow[***NUMPY***]":
-        st.subheader("About Numpy")
+        st.subheader("About NUMPY")
         st.write("NumPy is a powerful Python library used for numerical computations. It provides support for arrays and matrices, along with a collection of mathematical functions to operate on these data structures efficiently. It's widely used in data science, machine learning, and scientific computing for its speed and versatility.")
         st.write("(1)Install library")
         st.code("pip install numpy")

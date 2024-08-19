@@ -24,7 +24,7 @@ study_zone_1, study_zone_2 = st. tabs(["Python","English"])
 #Python zone
 with study_zone_1:
     select_value_python = st.radio("Choice Python library what you want.",
-            [":rainbow[***PANDAS***]",":rainbow[***NUMPY***]",":rainbow[***Pythorch***]"]
+            [":rainbow[***PANDAS***]",":rainbow[***NUMPY***]",":rainbow[***Pytorch***]"]
             )
     
 # PANDAS section
@@ -1427,3 +1427,55 @@ with study_zone_1:
             arr_vh_2_h = np.hsplit(arr_vh_2,2)
             st.write("arr_vh_2_h = np.hsplit(arr_vh_2,2)")
             arr_vh_2_h
+
+#Pytorch section
+    elif select_value_python == ":rainbow[***Pytorch***]":
+        st.subheader("About Pytorch")
+        st.write("PyTorch는 주로 딥러닝 연구 및 개발을 위해 사용되는 오픈 소스 딥러닝 프레임워크임. PyTorch는 Facebook AI Research (FAIR)에서 개발되었으며, Python과 C++로 작성되어 있음. PyTorch는 특히 다음과 같은 이유로 인기를 얻음.")
+        pytorch_feature = '''
+        동적 계산 그래프 (Dynamic Computation Graph):
+        PyTorch는 동적 계산 그래프를 사용합니다. 이는 계산 그래프가 실행 중에 정의되고 변경될 수 있음을 의미합니다. 이 방식은 코드 디버깅을 용이하게 하고, 복잡한 모델을 쉽게 작성할 수 있게 해줌.
+        TensorFlow와 같은 일부 다른 프레임워크는 정적 계산 그래프를 사용하여, 그래프를 미리 정의하고 실행함. PyTorch의 동적 그래프는 더욱 유연한 모델 작성 및 실험에 적합함.
+
+        Pythonic:
+        PyTorch는 Python과 깊이 통합되어 있어 Python 사용자에게 친숙함. Pythonic한 인터페이스 덕분에 사용자가 익숙한 Python 코드 스타일로 모델을 작성할 수 있음.
+        또한, NumPy와 유사한 문법과 연산을 제공하여, Tensor 연산을 매우 직관적으로 수행할 수 있음.
+
+        자동 미분 (Autograd):
+        PyTorch는 자동 미분 기능을 제공함. 이는 모델의 역전파 과정에서 그래디언트를 자동으로 계산해주는 기능임. 덕분에 사용자들은 직접 복잡한 미분 연산을 구현할 필요 없이 모델의 학습을 진행할 수 있음.
+
+        광범위한 지원:
+        PyTorch는 다양한 신경망 레이어, 손실 함수, 최적화 알고리즘, 데이터 로더, 변환 등 딥러닝 개발에 필요한 도구들을 제공함.
+        또한, GPU 가속을 지원하여 대규모 연산을 효율적으로 수행할 수 있음.
+
+        커뮤니티와 생태계:
+        PyTorch는 활발한 개발자 커뮤니티와 강력한 생태계를 가지고 있음. 다양한 튜토리얼, 오픈 소스 프로젝트, 연구 논문 등이 PyTorch를 기반으로 제공되며, 빠르게 발전하고 있음.
+        PyTorch 생태계에는 PyTorch Lightning, TorchServe, Hugging Face Transformers와 같은 다양한 확장 라이브러리도 포함되어 있어, 모델 개발, 배포 등을 쉽게 할 수 있음.
+
+        활용 분야
+        PyTorch는 주로 딥러닝 모델의 연구, 프로토타이핑, 그리고 실제 서비스 배포에 사용됨. 특히 다음과 같은 분야에서 널리 사용됨.
+
+        컴퓨터 비전: 이미지 분류, 객체 탐지, 세그멘테이션 등
+        자연어 처리 (NLP): 텍스트 분류, 언어 모델링, 번역, 감정 분석 등
+        강화 학습: 에이전트 학습 및 시뮬레이션 환경에서의 활용
+        생성 모델: GANs, VAE 등 생성적 모델 연구 및 개발
+        결론적으로, PyTorch는 유연성과 사용 편의성 덕분에 연구자와 개발자 사이에서 널리 사용되는 딥러닝 프레임워크로 자리잡고 있음.
+        '''
+        pytorch_intro_1 = st.container(border=True)
+        with pytorch_intro_1:
+            st.write(pytorch_feature)
+        st.divider()
+        st.subheader("Pytorch and Tensorflow")
+        pytorch_intro_2 = st.container(border=True)
+        with pytorch_intro_2:
+            st.write("PyTorch와 TensorFlow는 딥러닝에서 널리 사용되는 두 주요 프레임워크임. TensorFlow는 Google에서 개발했으며, 정적 계산 그래프를 사용하다가 이후 동적 계산 그래프(Eager Execution)를 도입했습니다. 대규모 배포와 확장에 강점을 가지며, TensorFlow Serving, TensorFlow Lite 등의 다양한 배포 옵션을 제공함. PyTorch는 Facebook에서 개발했으며, 처음부터 동적 계산 그래프를 채택하여 Python 사용자에게 친숙한 인터페이스를 제공합니다. 연구 및 프로토타이핑에 강점이 있으며, 최근에는 산업 배포 도구(TorchServe 등)도 발전함. 두 프레임워크는 각자의 장점이 있으며, 상호 경쟁하면서도 발전을 이뤄가고 있는 중 임.")
+        st.divider()
+        st.subheader("Pytorch and Tensor")
+        pytorch_intro_3 = st.container(border=True)
+        with pytorch_intro_3:
+            st.write('''PyTorch와 Tensor는 밀접한 관계가 있음. PyTorch는 텐서 연산을 중심으로 하는 딥러닝 프레임워크이며, 텐서(Tensor)는 PyTorch의 기본 데이터 구조임. 이를 좀 더 구체적으로 설명하면 다음과 같음.\n
+                    1. Tensor의 정의 : Tensor는 다차원 배열(n-dimensional array) 또는 일반화된 행렬로, 숫자 데이터를 담는 컨테이너임. 텐서는 1차원 배열(벡터)부터 2차원 배열(행렬), 더 나아가 고차원의 배열까지 다양한 형태를 가짐. 텐서는 NumPy의 ndarray와 유사한 개념이지만, GPU 가속 연산을 지원하며, 자동 미분 기능이 포함된다는 점에서 차이가 있음.\n
+    2. PyTorch에서의 Tensor : PyTorch에서 Tensor는 모든 데이터 및 모델의 기본 구조로 사용됨. 모델의 입력 데이터, 가중치, 손실 함수 등 모든 것이 텐서로 표현됨. PyTorch의 텐서는 CPU뿐만 아니라 GPU에서도 연산을 수행할 수 있음. 이를 통해 대규모 데이터와 복잡한 연산을 효율적으로 처리할 수 있음.\n
+    3. Tensor의 기능 : PyTorch의 Tensor는 다양한 수학적 연산을 지원함. 예를 들어, 행렬 곱셈, 요소별 연산, 트랜스포즈, 역행렬 계산 등을 할 수 있음. 자동 미분(Autograd)과 같이 PyTorch의 텐서는 자동 미분 기능을 통해 역전파(Backpropagation) 중 그래디언트를 자동으로 계산할 수 있음. 이는 딥러닝 모델의 학습에 매우 유용함. 텐서는 GPU에서의 병렬 연산을 통해 연산 속도를 크게 높일 수 있음.\n
+    4. Tensor와 PyTorch의 관계 요약 : PyTorch는 Tensor를 기반으로 한 연산을 제공하는 딥러닝 프레임워크임. Tensor는 PyTorch에서 모든 데이터 구조의 기본이 되며, PyTorch의 강력한 기능(예: 자동 미분, GPU 연산)을 통해 딥러닝 모델 개발을 지원함. PyTorch의 사용자는 Tensor를 통해 데이터를 관리하고 연산하며, 이 과정을 통해 모델을 구축하고 학습시킬 수 있음.''')
+    st.divider()

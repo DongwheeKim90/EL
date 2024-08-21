@@ -41,5 +41,6 @@ if st.session_state.upload_area_pdf is not None:
         data=text_content,
         file_name=f"{file_nm}.txt",
         mime="text/plain",
-        type="primary"
+        type="primary",
+        use_container_width=True
     )

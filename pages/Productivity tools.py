@@ -29,10 +29,16 @@ with contents_zone:
         st.write(f"- Total {st.session_state['page_num']} pages.")
         st.write("- Result of extracted")
         st.write(f"{st.session_state['output_text']}")
-txt_btn = st.button("Download to .txt file",use_container_width=True,type="primary")
+file_nm = str(st.session_state.upload_area_pdf.name).replace(".pdf","")
+txt_btn = st.button("Download to .txt file",
+                    use_container_width=True,
+                    type="primary",
+                    data=st.session_state['output_text'],
+                     file_name=f"{file_nm}.txt",
+                    mime="text/plain"
+                    )
 
-if txt_btn:
-    down_spin = st.spinner("Please wait a minute.")
-    file_nm = str(st.session_state.upload_area_pdf.name).replace(".pdf","")
-    with open(f"{file_nm}.txt","w", encoding="utf-8") as dwn_file:
-        dwn_file.write(st.session_state['output_text'])
+#if txt_btn:
+#    down_spin = st.spinner("Please wait a minute.")
+#    with open(f"{file_nm}.txt","w", encoding="utf-8") as dwn_file:
+#        dwn_file.write(st.session_state['output_text'])

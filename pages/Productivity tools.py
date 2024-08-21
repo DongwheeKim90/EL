@@ -22,7 +22,7 @@ st.subheader("File summary and Extracted content")
 contents_zone = st. container(border=True, height=400)
 with contents_zone:
     if st.session_state.upload_area_pdf == None:
-        contents_zone_col_1, contents_zone_col_2, contents_zone_col_3 = st.columns([0.3,0.4,0.3])
+        contents_zone_col_1, contents_zone_col_2, contents_zone_col_3 = st.columns([0.2,0.4,0.3])
         with contents_zone_col_2:
             st.image("useData/EL_img/upload_pdf.png", width=369)
     else:
@@ -30,16 +30,15 @@ with contents_zone:
         st.write("- Result of extracted")
         st.write(f"{st.session_state['output_text']}")
         
-if upload_area_pdf is not None:
-    file_nm = str(upload_area_pdf.name).replace(".pdf", "")
-    txt_btn = st.download_button(
-        label="Download to .txt file",
-        data=st.session_state['output_text'],
-        file_name=f"{file_nm}.txt",
-        mime="text/plain"
-    )
+        file_nm = str(st.session_state.upload_area_pdf.name).replace(".pdf", "")
+        text_content = st.session_state['output_text']
+        # 다운로드 버튼을 생성하여 사용자에게 파일을 제공
 
-#if txt_btn:
-#    down_spin = st.spinner("Please wait a minute.")
-#    with open(f"{file_nm}.txt","w", encoding="utf-8") as dwn_file:
-#        dwn_file.write(st.session_state['output_text'])
+# 다운로드 버튼을 contents_zone 아래로 이동
+if st.session_state.upload_area_pdf is not None:
+    st.download_button(
+        label="Download your text file",
+        data=text_content,
+        file_name=f"{file_nm}.txt",
+        mime="text/plain",
+    )

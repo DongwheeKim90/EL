@@ -17,7 +17,7 @@ def get_pdf_contents():
             output_text = []
             for page in pdf.pages:
                 # 각 페이지에서 텍스트를 추출.
-                text = page.extract_text().replace("()"," ").replace("•", "").replace('''""''',"").replace(". ","").replace("Copyright©2023. Acadential. All rights reserved.","").replace("/ , , ,","")
+                text = page.extract_text().replace("()"," ").replace("•", "").replace('''""''',"").replace(". ","").replace("Copyright©2023. Acadential. All rights reserved.","").replace("/ , , ,","").replace("Copyright©2023AcadentialAll rights reserved.","")
                 # 추출된 텍스트를 리스트에 추가.
                 output_text.append(text)
         

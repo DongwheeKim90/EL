@@ -29,7 +29,7 @@ with contents_zone:
         st.write(f"- Total {st.session_state['page_num']} pages.")
         st.write("- Result of extracted")
         st.write(f"{st.session_state['output_text']}")
-file_nm = str(st.session_state.upload_area_pdf.name).replace(".pdf","")
+        file_nm = str(st.session_state.upload_area_pdf.name).replace(".pdf","")
 txt_btn = st.button("Download to .txt file",
                     use_container_width=True,
                     type="primary",

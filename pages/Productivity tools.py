@@ -22,21 +22,22 @@ st.subheader("File summary and Extracted content")
 contents_zone = st. container(border=True, height=400)
 with contents_zone:
     if st.session_state.upload_area_pdf == None:
-        contents_zone_col_1, contents_zone_col_2, contents_zone_col_3 = st.columns([0.2,0.4,0.3])
+        contents_zone_col_1, contents_zone_col_2, contents_zone_col_3 = st.columns([0.3,0.4,0.3])
         with contents_zone_col_2:
             st.image("useData/EL_img/upload_pdf.png", width=369)
     else:
         st.write(f"- Total {st.session_state['page_num']} pages.")
         st.write("- Result of extracted")
         st.write(f"{st.session_state['output_text']}")
-        file_nm = str(st.session_state.upload_area_pdf.name).replace(".pdf","")
-        txt_btn = st.button("Download to .txt file",
-                            use_container_width=True,
-                            type="primary",
-                            data=st.session_state['output_text'],
-                            file_name=f"{file_nm}.txt",
-                            mime="text/plain"
-                            )
+        
+if upload_area_pdf is not None:
+    file_nm = str(upload_area_pdf.name).replace(".pdf", "")
+    txt_btn = st.download_button(
+        label="Download to .txt file",
+        data=st.session_state['output_text'],
+        file_name=f"{file_nm}.txt",
+        mime="text/plain"
+    )
 
 #if txt_btn:
 #    down_spin = st.spinner("Please wait a minute.")

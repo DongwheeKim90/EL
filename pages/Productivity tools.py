@@ -30,13 +30,13 @@ with contents_zone:
         st.write("- Result of extracted")
         st.write(f"{st.session_state['output_text']}")
         file_nm = str(st.session_state.upload_area_pdf.name).replace(".pdf","")
-txt_btn = st.button("Download to .txt file",
-                    use_container_width=True,
-                    type="primary",
-                    data=st.session_state['output_text'],
-                     file_name=f"{file_nm}.txt",
-                    mime="text/plain"
-                    )
+        txt_btn = st.button("Download to .txt file",
+                            use_container_width=True,
+                            type="primary",
+                            data=st.session_state['output_text'],
+                            file_name=f"{file_nm}.txt",
+                            mime="text/plain"
+                            )
 
 #if txt_btn:
 #    down_spin = st.spinner("Please wait a minute.")
